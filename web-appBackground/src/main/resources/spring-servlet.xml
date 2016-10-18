@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+         http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/task 
+		http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+	
+	<!-- 自动扫描controller包下的所有类，使其认为spring mvc的控制器 -->
+	<context:component-scan base-package="com.sykj.app.web.*" />
+	
+
+	
+	<!-- 26号后新赠卡券 -->
+<!-- 	<task:scheduler id="mySchedulerErpUserCardNew" pool-size="10"/>
+	<task:scheduled-tasks scheduler="mySchedulerErpUserCardNew">   
+       		<task:scheduled ref="erpUserCardGiveNewListener" method="synErpYktCardFromErp" cron="0 0/2 * * * ?"/>
+	</task:scheduled-tasks> -->
+	
+	<!-- ERP推券 -->
+<!-- 	<task:scheduler id="mySchedulerErpPushCard" pool-size="10"/>
+	<task:scheduled-tasks scheduler="mySchedulerErpPushCard">   
+       		<task:scheduled ref="erpPushCardListener" method="pushCardWoman" cron="0 0/2 * * * ?"/>
+	</task:scheduled-tasks> -->
+		
+	<!-- 生成订单到Erp系统、会员绑定发送模板消息  每分钟一次 -->
+<!-- 	<task:scheduler id="mySchedulerOneMinute" pool-size="10"/>
+	<task:scheduled-tasks scheduler="mySchedulerOneMinute">   
+        <task:scheduled ref="oneMinuteListener" method="oneMinuteHandle" cron="0 0/2 * * * ?"/>
+	</task:scheduled-tasks> -->
+	
+	<!-- 员工现金红包 -->
+<!-- 	<task:scheduled-tasks>   
+       	<task:scheduled ref="employeeCashMoneyListener" method="sendMoney" cron="0 0 1 * * ?"/>
+	</task:scheduled-tasks> -->
+	
+	<!-- erp系统储值卡同步到app  每天凌晨 2点同步一次 -->
+<!-- 	<task:scheduled-tasks>
+        <task:scheduled ref="erpUnBoundCardListener" method="synUnBoundCardFromErp" cron="0 0 2 * * ?"/> 
+	</task:scheduled-tasks>  -->
+	
+	<!-- 退还亲友券，每天凌晨3点跑一次 -->
+<!-- 	<task:scheduled-tasks>
+		<task:scheduled ref="initItemgiveService" method="editReturnSavingsCard" cron="0 0 3 * * ?" />
+	</task:scheduled-tasks> -->
+	
+	<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+ 	<bean id="mappingJacksonHttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
+ 	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="mappingJacksonHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" />
+	<!-- 文件上传 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- set the max upload size100MB -->
+		<property name="maxUploadSize">
+			<value>500000000</value>
+		</property>
+		<property name="maxInMemorySize">
+			<value>4096</value>
+		</property>
+	</bean>
+	<!-- 拦截器 -->
+  	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.sykj.app.web.interceptors.AuthInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors> 
+	
+	<!-- captcha -->
+	<bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+		<property name="config">
+			<bean class="com.google.code.kaptcha.util.Config">
+				<constructor-arg>
+					<props>
+						<prop key="kaptcha.border">yes</prop>
+						<prop key="kaptcha.border.color">201,204,209</prop>
+						<prop key="kaptcha.textproducer.font.color">29,94,148</prop>
+						<prop key="kaptcha.textproducer.char.string">123456789</prop>
+						<prop key="kaptcha.image.width">133</prop>
+						<prop key="kaptcha.image.height">55</prop>
+						<prop key="kaptcha.textproducer.font.size">35</prop>
+						<prop key="kaptcha.session.key">code</prop>
+						<prop key="kaptcha.textproducer.char.length">4</prop>
+						<prop key="kaptcha.textproducer.font.names">微软雅黑,Arial</prop>
+						<prop key="kaptcha.textproducer.char.space">3</prop>
+						<prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.WaterRipple</prop>
+					</props>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean> 
+</beans>

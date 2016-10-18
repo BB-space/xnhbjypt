@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-10-9 15:32:18 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="com.sykj.app.entity.mysql.SykjMemberCardTypePriceDetails"
+		table="SYKJMEMBERCARDTYPEPRICEDETAILS">
+		<id name="id" type="java.lang.String">
+			<column name="ID" />
+			<generator class="assigned" />
+		</id>
+		<property name="fldCompanyCode" type="java.lang.String">
+			<column name="FLDCOMPANYCODE" />
+		</property>
+		<property name="fldMemberCardTypeCode" type="java.lang.String">
+			<column name="FLDMEMBERCARDTYPECODE" />
+		</property>
+		<property name="fldStandardPrice" type="java.math.BigDecimal">
+			<column name="FLDSTANDARDPRICE" />
+		</property>
+		<property name="fldIsInherited" type="java.lang.Integer">
+			<column name="FLDISINHERITED" />
+		</property>
+		<property name="fldActualPrice" type="java.math.BigDecimal">
+			<column name="FLDACTUALPRICE" />
+		</property>
+		<property name="fldAllowModify" type="java.lang.Integer">
+			<column name="FLDALLOWMODIFY" />
+		</property>
+	</class>
+</hibernate-mapping>

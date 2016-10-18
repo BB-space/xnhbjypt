@@ -1,0 +1,105 @@
+@CHARSET "UTF-8";
+#sysJoinName{
+	width:300px;
+	height:90px;
+	background:#000;
+	margin:0 auto;
+	box-shadow:3px 3px 9px rgba(0,0,0,0.4);
+}
+#sysJoinNsapn{
+	width:400px;
+	height:90px;
+	line-height:90px;
+	color:#fff;
+	font-size:24px;
+	font-family:"微软雅黑 Light";
+	letter-spacing:4px;
+}
+
+i{
+	font-style: normal;
+	color: red;
+}
+.itip{
+	font-size:10px;
+	color:rgb(211,211,211);
+}
+.iaccount{
+	font-size:14px;
+	color:#4d4d4d;
+}
+
+.regUl{width:920px ;list-style: none;margin:0 auto;}
+.regUl li{width:180px;float: left;border-bottom: 2px solid #b3b3b3;padding-bottom:24px;color:#b3b3b3;text-align: center;}
+.regUl li span{width:8px;height:8px;background-color:#b3b3b3;padding:4px 8px;border-radius:100%;color: #FFF;margin-right:4px;}
+.lispec{border-bottom:2px solid  #48a631 !important;color: #333333 !important;}
+.lispanspec{background-color: #48a631 !important}
+
+.theCenterBox {min-height:100%;height:100%;padding:5px 0px 0px 0px;vertical-align:middle;z-index:1;}
+.theCenterBox .theLogoImg{ margin:0 auto; border:none; display: block;}
+.theCenterBox .theLoginBox {width:900px;height:auto; background:#fff;margin:0 auto;-moz-border-radius:3px;border-radius:3px;padding:0;}
+.theCenterBox .theLoginBox .loginTxt {font-size: 16px;color: #333;font-weight: normal;}
+.theLoginBox .theLoginArea { width: 720px;float: left;display: block;margin: 0px 34px 0px 135px;}s
+.theLoginBox .theLoginArea p {margin: 1px 0px 0px 0px;height: 60px;}
+.theLoginBox .theLoginArea p label{font-size:14px;text-align:right;color:#4d4d4d;padding:0;display: inline-block;width:120px;}
+.theLoginBox .theLoginArea p input{line-height: 18px;transition: all 0.30s ease-in-out;-webkit-transition: all 0.30s ease-in-out;-moz-transition: all 0.30s ease-in-out;border: 1px solid #B3B3B3;;;outline:none; width:360px; margin: 8px 0px;height: 18px;border-radius:0px; padding: 8px 4px 8px 4px;}
+.theLoginBox .theLoginArea p select{line-height: 28px;transition: all 0.30s ease-in-out;-webkit-transition: all 0.30s ease-in-out;-moz-transition: all 0.30s ease-in-out;border: 1px solid #D2D9DC;;;outline:none; margin: 8px 0px;border-radius:0px; padding: 8px 0px 8px 0px;}
+.theLoginBox .theLoginArea p input[type="file"]{width:60px}
+
+.theLoginBox .theLoginArea p span{ display:none;width:120px;background:none;line-height:21px; margin: 0px 0px 0px 0px; padding:0px 0px 0px 8px;font-size:12px; border-radius:3px;color:#c83100; border: 0px solid #FFF;}
+.theLoginBox .theLoginArea p input:hover{/* box-shadow: 0 0 0 5px rgba(247, 247, 250,.8);border-radius:0px; */}
+.theLoginBox .theLoginArea p input:focus{/* box-shadow:0 0 0 5px rgba(242, 248, 252,.8);border-radius:0px; */}
+.theLoginBox .theLoginArea p input.error, .theLoginBox .theLoginArea input.G-Anim-leftRight {box-shadow: 0 0 0 5px rgba(252, 245, 245, 0.8);;border-radius:0px;border: 1px solid #ECA9A4;}
+.theLoginBox .theLoginArea .loginSubmitBnt .theRememberMe, .theLoginBox .theLoginArea .loginSubmitBnt .theRememberMeLabel {display:inline-block;margin:26px 0px 15px 0px;color:#666;font-size:14px;}
+.theLoginBox .theLoginArea .loginSubmitBnt .forgotPasswordEm {font-size:12px; position:relative;top:8px;margin-left:50px;text-align:right;}
+.theLoginBox .theLoginArea .loginSubmitBnt .forgotPasswordEm a:link, .theLoginBox .theLoginArea .no_allow a:link, .theLoginBox .theLoginArea .no_allow a:visited,  .theLoginBox .theLoginArea .loginSubmitBnt .forgotPasswordEm a:visited { color:#ababab; text-decoration:none;}
+.theLoginBox .theLoginArea .loginSubmitBnt .forgotPasswordEm a:hover, .theLoginBox .theLoginArea .no_allow a:hover, .theLoginBox .theLoginArea .no_allow a:active,.theLoginBox .theLoginArea .loginSubmitBnt .forgotPasswordEm a:active {color:#ababab;text-decoration:underline;}
+.theLoginBox .theLoginArea .no_allow{margin: 0.6px 0px 9px 0px;padding: 5px 0px 4px 16px; font-size:14px;height: 40px;}
+.theLoginBox .theLoginArea .no_allow a { font-size:12px;margin-left:42px;color}
+.theLoginBox .theRegArea { float:left; width: 244px; padding: 37px 0px 110px 0px;border-left:1px solid #ccc;height: 138px;}
+.theLoginBox .theRegArea #reg_reg{padding-bottom:196px;}
+.theLoginBox .theRegArea h2{font-size:16px; color:#4f6b21;font-weight:normal; text-align:center;}
+.theLoginBox .theRegArea p { text-align:center;font-size:14px;padding:18px 0px 34px 0px;}
+.theLoginBox .theRegArea a, theLoginBox .theRegArea a.reg_login{cursor:pointer;text-decoration:none;}
+.theLoginBox .theRegArea a.reg_login{margin-left:75px;}
+.theLoginBox .theRegArea a.apply_reg{margin-left:75px;}
+.theLoginBox .theRegArea a.forgot_login{margin-left:75px;}
+.theLoginBox .forgot_right{ float:left; width: 244px; padding: 26px 0px 26px 0px;border-left:1px solid #ccc; margin: 39px 0px 42px 0px;}
+.theLoginBox .setpassword_right{}
+.LoginForm_password_limit{font-size:10px;font-style: normal;display:block;color: rgb(211,211,211);margin-left:130px;line-height: 6px;}
+.theSubmitNext{height:38px !important;border:none;color:#FFF;cursor:pointer;border-radius:2px;width:248px;}
+.theSubmitNextColorGray{background-color: #B3B3B3;}
+.theSubmitNextColorBlue{background-color: #48A631;}
+/*注册页面*/
+.theRegArea .apply_reg{ display:block;background: url(images/apply_account.png) no-repeat 0px 0px; height:35px;width:99px; padding:0px;}
+.theRegArea .apply_reg:hover{ display:block;background: url(images/apply_account.png) no-repeat -115px 0px; height:35px;width:99px; padding:0px;}
+.theRegArea .reg_login{ display:block;background: url(images/login_bg.png) no-repeat -15px -10px; height:45px;width:100px; padding:0px;}
+.theRegArea .reg_login:hover{ display:block;background: url(images/login_bg.png) no-repeat -123px -10px; height:45px;width:100px; padding:0px;}
+.loginSubmitBnt .reg_submit{ margin:0px 0px 33px 0px;border:none;display:block;height:45px;width:105px; padding:0px;}
+.loginSubmitBnt .reg_submit:hover{ background: url(images/login_bg.png) no-repeat -120px -101px; height:45px;width:105px; padding:0px;}
+
+
+/*协议*/
+.read{font-size:18px;font-weight:bold;text-align: center;width:1024px;border-bottom: 2px solid #48a631;margin:0 auto;}
+.read{margin-top:20px;padding-bottom:10px;}
+.readLeft{width:640px;height:374px;float: left;}
+.readRight{width:640px;height:374px;float:right;}
+.readContent{width:1300px;margin:0 auto;margin-top:30px}
+.clearfix{clear: both;}
+.readTip{margin-top:30px;}
+.readTip p{text-align: center;}
+.readTip span{color:#003399}
+.readAgree{margin-top:20px;}
+.readAgreeBtn{width:380px;background-color: #B3B3B3;color:#FFF;cursor:pointer;margin:0 auto;text-align: center;padding:10px 0;border-radius:4px;}
+.readAgreeBtnGreen{background-color: #48a631;}
+/**审核*/
+.regAuditImg{text-align: center}
+.regAuditImg img{margin-top:60px;width:80px;}
+.regAuditImg p{line-height: 36px;}
+
+.regColor1{
+	color:#48a631 !important;
+}
+.regColor2{
+	color:#c83100;	
+}

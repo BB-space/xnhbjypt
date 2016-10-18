@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-10-10 10:56:43 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.sykj.app.entity.mysql.SykjMemberCardType" table="SYKJ_ERP_MEMBERCARDTYPE">
+        <id name="id" type="java.lang.String">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="fldMemberCardTypeCode" type="java.lang.String">
+            <column name="FLDMEMBERCARDTYPECODE" />
+        </property>
+        <property name="fldDescription1" type="java.lang.String">
+            <column name="FLDDESCRIPTION1" />
+        </property>
+        <property name="fldAmounts" type="java.math.BigDecimal">
+            <column name="FLDAMOUNTS" />
+        </property>
+        <property name="fldPresentAmount" type="java.math.BigDecimal">
+            <column name="FLDPRESENTAMOUNT" />
+        </property>
+        <property name="extraAmoun" type="java.math.BigDecimal">
+            <column name="EXTRAAMOUN" />
+        </property>
+        <property name="fldMnemonicCode" type="java.lang.String">
+            <column name="FLDMNEMONICCODE" />
+        </property>
+        <property name="fldLowestRechargeLimit" type="java.math.BigDecimal">
+            <column name="FLDLOWESTRECHARGELIMIT" />
+        </property>
+        <property name="fldFloorAmount" type="java.math.BigDecimal">
+            <column name="FLDFLOORAMOUNT" />
+        </property>
+        <property name="fldSafeAmount" type="java.math.BigDecimal">
+            <column name="FLDSAFEAMOUNT" />
+        </property>
+        <property name="fldMaxArrearageAmount" type="java.math.BigDecimal">
+            <column name="FLDMAXARREARAGEAMOUNT" />
+        </property>
+        <property name="fldVirtualCategoryCode" type="java.lang.Integer">
+            <column name="FLDVIRTUALCATEGORYCODE" />
+        </property>
+        <property name="fldUseOutstandingAs" type="java.lang.String">
+            <column name="FLDUSEOUTSTANDINGAS" />
+        </property>
+        <property name="fldUsePresentOutstandingAs" type="java.lang.String">
+            <column name="FLDUSEPRESENTOUTSTANDINGAS" />
+        </property>
+        <property name="fldPresentGoodsTypeAllow" type="java.lang.String">
+            <column name="FLDPRESENTGOODSTYPEALLOW" />
+        </property>
+        <property name="fldPresentItemTypeAllow" type="java.lang.String">
+            <column name="FLDPRESENTITEMTYPEALLOW" />
+        </property>
+        <property name="fldStopSale" type="java.lang.Integer">
+            <column name="FLDSTOPSALE" />
+        </property>
+        <property name="fldExtraAmount" type="java.math.BigDecimal">
+            <column name="FLDEXTRAAMOUNT"/>
+        </property>
+        <property name="fldCreator" type="java.lang.String">
+            <column name="FLDCREATOR" />
+        </property>
+        <property name="fldCreateTime" type="java.sql.Timestamp">
+            <column name="FLDCREATETIME" />
+        </property>
+        <property name="fldNoOfModi" type="java.lang.Integer">
+            <column name="FLDNOOFMODI" />
+        </property>
+        <property name="fldLastModifier" type="java.lang.String">
+            <column name="FLDLASTMODIFIER" />
+        </property>
+        <property name="fldLastModiTime" type="java.sql.Timestamp">
+            <column name="FLDLASTMODITIME" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,179 @@
+*{
+	margin:0;
+	padding:0;
+}
+
+body{
+	min-width:800px;
+	min-height:600px;
+}
+
+.clear{
+	clear:both;
+}
+
+.heading{
+	width:100%;
+	height:9%;
+	background:#fff;
+	border-bottom:1px solid #000;
+}
+
+.container{
+	background-image:url('../img/bg.png');
+	background-size:100% 100%;
+	height:80%;
+}
+
+.footing{
+	width:100%;
+	height:10.9%;
+	background:#000;
+	text-align:center;
+}
+
+.heading .box{
+	display:inline-block;
+	width:49.5%;
+	text-align:center;
+	height:100%;
+}
+.heading .box div{
+	display:table;
+	text-algin:center;
+	width:100%;
+	height:100%;
+}
+.heading .box span{
+    display:table-cell;
+    vertical-align:middle;
+}
+#logo{
+	width:300px;
+}
+
+.container .sysName{
+	display:inline-block;
+	width:49.5%;
+	text-align:center;
+}
+#sysName{
+	width:300px;
+	height:90px;
+	background:#000;
+	margin:0 auto;
+	box-shadow:3px 3px 9px rgba(0,0,0,0.4);
+}
+#sysNsapn{
+	width:360px;
+	height:90px;
+	line-height:90px;
+	color:#fff;
+	font-size:30px;
+	font-family:"微软雅黑 Light";
+	letter-spacing:4px;
+}
+
+.footing p{
+	color:rgba(211,211,211,0.5);
+}
+
+.loginBox{
+	width:300px;
+	height:355px;
+	background:rgba(246,246,246,0.8);
+	border-radius:6px;
+	box-shadow:2px 2px 13px rgba(0,0,0,0.46);
+	display:table;
+	float:right;
+	margin-top:50px;
+	margin-right:15%;
+}
+.loginBox .chooseBtn{
+	width:300px;
+	height:50px;
+}
+.loginBox .chooseBtn .box{
+	float:left;
+	width:150px;
+	height:50px;
+	line-height:50px;
+	text-align:center;
+	font-weight:600;
+	border-radius:6px 0 0 0;
+	color:#505050;
+}
+.light{
+	background:rgb(229,229,229) !important;
+}
+.loginBox .onLogin{
+	width:300px;
+	background:rgba(246,246,246,0.8);
+	margin:30px 0;
+}
+.loginBox .onLogin .nameBox{
+	width:248px;
+	margin:0 20px;
+	border:1px solid rgb(211,211,211);
+	border-radius:5px;
+	margin-bottom:20px;
+	display:table;
+	background:rgba(255,255,255,0.8);
+	padding:5px;
+}
+.loginBox .onLogin .nameBox img{
+	vertical-align:middle;
+}
+.loginBox .onLogin .nameBox .writeText{
+	height:30px;
+	width:180px;
+	vertical-align:middle;
+	padding-left:5px;
+	border:none;
+	background:rgba(255,255,255,0.8);
+	color:rgb(211,211,211);
+	font-size:18px;
+}
+.loginBox .onLogin .nameBox .writeText:focus{
+	color:#000;
+}
+.loginBox .onLogin .keep{
+	margin-left:20px;
+	margin-bottom:35px;
+}
+#ck_rmbUser{
+	margin-right:10px;
+}
+/* .loginBox .onLogin .loginBtn{ */
+/* 	width:250px; */
+/* 	font-size:20px; */
+/* 	margin:0 25px; */
+/* 	padding:10px; */
+/* 	border-radius:50px; */
+/* 	border:1px solid #333333; */
+/* 	background:#fff; */
+/* 	font-weight:600; */
+/* 	outline:none; */
+/* 	color:#000; */
+/* 	cursor:pointer; */
+/* } */
+.loginBox .onLogin .btnBox{
+	width:258px;
+	margin:0 20px;
+}
+.loginBox .onLogin .btnBox .btn{
+	width:100px;
+	font-size:16px;
+	padding:6px 10px;
+	background:#fff;
+	border:1px solid #000;
+	border-radius:5px;
+	float:right;
+	cursor:pointer;
+	outline:none;
+}
+.loginBtn{
+	background:#000 !important;
+	color:#fff !important;
+	float:left !important;
+}
