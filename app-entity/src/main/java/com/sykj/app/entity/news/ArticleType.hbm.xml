@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.sykj.app.entity.news.ArticleType" table="xnhb_news_ArticleType"
+		schema="">
+		<comment>文章类别</comment>
+		<id name="id" type="java.lang.String">
+            <column name="ArticleType_ID" length="36" />
+            <generator class="assigned" />
+        </id>
+		<property name="createDateTime" type="java.lang.String">
+			<column name="CREATEDATETIME" length="50">
+			</column>
+		</property>
+		<property name="createUser" type="java.lang.String">
+			<column name="CREATEUSER" length="50">
+			</column>
+		</property>
+		<property name="updateDateTime" type="java.lang.String">
+			<column name="UPDATEDATETIME" length="50">
+			</column>
+		</property>
+		<property name="updateUser" type="java.lang.String">
+			<column name="UPDATEUSER" length="50">
+			</column>
+		</property>
+		<property name="typename" type="java.lang.String">
+			<column name="TYPENAME" length="50">
+			</column>
+		</property>
+		<property name="typenumber" type="java.lang.String">
+			<column name="typenumber" length="50">
+			</column>
+		</property>
+		<property name="keyword" type="java.lang.String">
+			<column name="keyword" length="50">
+			</column>
+		</property>
+		<property name="language" type="java.lang.String">
+			<column name="language" length="50">
+			</column>
+		</property>
+		<property name="pid" type="java.lang.String">
+			<column name="pid" length="50">
+			</column>
+		</property>
+		
+	</class>
+</hibernate-mapping>

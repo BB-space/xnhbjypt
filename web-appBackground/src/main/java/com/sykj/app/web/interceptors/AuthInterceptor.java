@@ -89,50 +89,50 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 //		}
 //	}
 		
-		System.out.println(requestPath.contains("test")+"234");
-		if(requestPath.contains("test")||requestPath.contains("kaptcha")||requestPath.contains("safe")||requestPath.contains("code")){
-			System.out.println("*****"+requestPath);
-			return true;
-		}
-		if(requestPath.contains("/compamy/coreServlet.do")){
-			return true;
-		}
-		Resources resources =resourcesService.getResourcesBySrc(requestPath);
-		response.setCharacterEncoding("utf-8");
-		if(resources==null){
-			System.out.println("---------------------first"+requestPath);
-			requestPath = request.getRequestURI().substring(request.getContextPath().length());
-			resources = resourcesService.getResourcesBySrc(requestPath);
-			if(resources==null){
-				System.out.println("---------------------second"+requestPath);
-				forward("数据库缺失【" + requestPath + "】资源！", request, response);
-				return false;
-			}
-		}
-		if(resources.getOnoff().equals("0")){
-			return true;
-		}
-		
-		if(requestPath.equals("/weChat.do?login")){
-			String wxurl="https://open.weixin.qq.com/connect/qrconnect?appid=wx100e8ffec08db0c7&redirect_uri="+
-						 "http%3A%2F%2Fwww.haircentre.cn%2Fykt%2FweChat%2Fcallback.do&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect";
-			response.sendRedirect(wxurl);
-			return false;
-		}
-		if(requestPath.length() == 19) {
-			if(requestPath.substring(1,19).equals("weChat/callback.do")){
-				return true;
-			}
-		}
-		if(requestPath.equals("/wxRegistered.do?registered")){
-			return true;
-		}
-		UserM userM = (UserM) request.getSession().getAttribute("userM");
-		if(userM==null){
-			System.out.println("session失效处理");
-			doSessionOut(request,response);//处理用户长时间未操作
-			return false;
-		}
+//		System.out.println(requestPath.contains("test")+"234");
+//		if(requestPath.contains("test")||requestPath.contains("kaptcha")||requestPath.contains("safe")||requestPath.contains("code")){
+//			System.out.println("*****"+requestPath);
+//			return true;
+//		}
+//		if(requestPath.contains("/compamy/coreServlet.do")){
+//			return true;
+//		}
+//		Resources resources =resourcesService.getResourcesBySrc(requestPath);
+//		response.setCharacterEncoding("utf-8");
+//		if(resources==null){
+//			System.out.println("---------------------first"+requestPath);
+//			requestPath = request.getRequestURI().substring(request.getContextPath().length());
+//			resources = resourcesService.getResourcesBySrc(requestPath);
+//			if(resources==null){
+//				System.out.println("---------------------second"+requestPath);
+//				forward("数据库缺失【" + requestPath + "】资源！", request, response);
+//				return false;
+//			}
+//		}
+//		if(resources.getOnoff().equals("0")){
+//			return true;
+//		}
+//		
+//		if(requestPath.equals("/weChat.do?login")){
+//			String wxurl="https://open.weixin.qq.com/connect/qrconnect?appid=wx100e8ffec08db0c7&redirect_uri="+
+//						 "http%3A%2F%2Fwww.haircentre.cn%2Fykt%2FweChat%2Fcallback.do&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect";
+//			response.sendRedirect(wxurl);
+//			return false;
+//		}
+//		if(requestPath.length() == 19) {
+//			if(requestPath.substring(1,19).equals("weChat/callback.do")){
+//				return true;
+//			}
+//		}
+//		if(requestPath.equals("/wxRegistered.do?registered")){
+//			return true;
+//		}
+//		UserM userM = (UserM) request.getSession().getAttribute("userM");
+//		if(userM==null){
+//			System.out.println("session失效处理");
+//			doSessionOut(request,response);//处理用户长时间未操作
+//			return false;
+//		}
 		return true;
 	}
 	

@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+
+/* by author lx */
+.page_btn {
+	margin-top:20px;
+}
+.page_btn a {
+	cursor: pointer;
+	padding: 5px;
+	border: solid 1px #ccc;
+	font-size: 12px;
+}
+.page_box {
+	width:800px; 
+}
+.num {
+	padding: 0 10px;
+}

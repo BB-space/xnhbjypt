@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 
 
@@ -39,6 +40,10 @@ public class BaseController {
 		// dateFormat.setLenient(false);
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
 		// binder.registerCustomEditor(String.class, new StringTrimmerEditor(false));
+	}
+	
+	public ModelAndView getModelAndView(){
+		return new ModelAndView();
 	}
 
 }
