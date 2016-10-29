@@ -90,8 +90,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 //	}
 		
 		System.out.println(requestPath.contains("test")+"234");
-		if(requestPath.contains("test")){
-			System.out.println("*****");
+		if(requestPath.contains("test")||requestPath.contains("kaptcha")||requestPath.contains("safe")||requestPath.contains("code")){
+			System.out.println("*****"+requestPath);
 			return true;
 		}
 		if(requestPath.contains("/compamy/coreServlet.do")){

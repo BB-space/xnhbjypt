@@ -40,7 +40,7 @@
     <description>Introspector缓存清除监听器</description>
     <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
   </listener>
-  <servlet>
+<!--   <servlet>
     <servlet-name>initServlet</servlet-name>
     <servlet-class>  
             com.sykj.app.web.interceptors.InitServlet  
@@ -50,7 +50,7 @@
       <param-value>8090</param-value>
     </init-param>
     <load-on-startup>0</load-on-startup>
-  </servlet>
+  </servlet> -->
   <servlet>
     <description>spring mvc servlet</description>
     <servlet-name>springMvc</servlet-name>
