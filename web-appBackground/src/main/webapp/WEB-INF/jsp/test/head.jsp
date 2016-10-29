@@ -19,6 +19,7 @@
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
  <script src="<%=request.getContextPath()%>/resources/js/test/bootstrap.min.js"></script>
  <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/test/flexslider.css" type="text/css" media="screen" />
+<script src="<%=request.getContextPath()%>/resources/js/test/jquerySession.js"></script>
 
  <script type="text/javascript">
  var mark ;
@@ -265,6 +266,10 @@
  				success : function(data) {
  					var d = $.parseJSON(data);
  					if (d.success == true) {
+
+ 						console.info('${sessionScope}');
+ 						console.info('${sessionScope.frontUserM}');
+ 						
  						$(".lg_win .res").click();
  						$('.loginDiv').hide();
  						$('.login_after').show();
@@ -272,7 +277,13 @@
  						$('#li_userName').html('用户名：'+d.obj.userName);
  						$('#li_UID').html('UID　 ：'+d.obj.uid);
  						$('#li_totalMoney').html('总资产：<span class="red">￥'+d.obj.totalMoney+'</span>');
- 						//save();
+ 						
+ 						$.session.set("login", "true");
+ 						//如果是点击财务中心，安全中心的，登陆后跳转
+ 						if($.session.get("location")){
+ 							window.location.href = $.session.get("location");
+ 							$.session.remove("location");
+ 						}
  					} else {
  						alert("用户名或密码错误，请重新输入！");
  					}
@@ -313,6 +324,7 @@
 			success : function(data) {
 				var d = $.parseJSON(data);
 				if (d.success == true) {
+					
 					$(".lg_win .res").click();
 					$('.loginDiv').hide();
 					$('.login_after').show();
@@ -321,8 +333,9 @@
 					$('#li_UID').html('UID　 ：'+d.obj.uid);
 					$('#li_totalMoney').html('总资产：<span class="red">￥'+d.obj.totalMoney+'</span>');
 				} else {
-					alert('注册失败！');
-					return false;
+					if(d.msg = '1'){	//验证码不正确
+						$('#err_reg_mobileCheckCode').html("验证码不正确！").addClass("Validform_checktip Validform_wrong");
+					}
 				}
 			}
 		});
@@ -378,14 +391,25 @@
 	}
 	
 	function checkLogin(part){
-		window.location.href = "${pageContext.request.contextPath}/safe.do?safeSetting";
-
-		/* if('${sessionScope.frontUserM}'){
-			window.location.href = "${pageContext.request.contextPath}/"+part+".do?" + part;
+		var location = '';
+		if(part == 1){
+			location = "${pageContext.request.contextPath}/finance.do?finance";
+		}else if(part == 2){
+			location = "${pageContext.request.contextPath}/safe.do?safeSetting";
+		}
+		if($.session.get("login") == "true"){
+			window.location.href = location;
 		}else {
 			//弹出登陆界面
+			 $.session.set("location", location);
 			$('#login_a').click();
-		}	 */
+		}
+	}
+	
+	function logOut(){
+		 $.session.remove("login");
+		 $.session.remove("location");
+		 window.location.href = "<%=request.getContextPath()%>/test.do?logout";
 	}
 	
 	function changeImg(type) {
@@ -445,7 +469,7 @@
             			<a href="#" class="go_btn">我要购买</a>
             			
             			<div class="mof">
-            				<a href="<%=request.getContextPath()%>/test.do?logout">退出</a>
+            				<a href="javascript:logOut();">退出</a>
             				<a href="#">充值</a>
             				<a href="#">提现</a>
             				<a href="#">委托管理</a>
@@ -462,8 +486,8 @@
               <ul class="nav navbar-nav">
                 <li><a href="<%=request.getContextPath()%>/test.do?index" data-hover="Home"><img id="index" src="<%=request.getContextPath()%>/resources/img/test/navHome2.png"></a></li>
 				<li><a href="trade.html" data-hover="About"><img id="trade" src="<%=request.getContextPath()%>/resources/img/test/navTrade.png"></a></li>
-				<li><a href="#" data-hover="Services"><img onclick="checkLogin(finance);" id="finance" src="<%=request.getContextPath()%>/resources/img/test/navFinance.png"></a></li>
-				<li><a href="#" data-hover="Shortcodes"><img onclick="checkLogin(safe);" id="safe" src="<%=request.getContextPath()%>/resources/img/test/navSafe.png"></a></li>
+				<li><a href="#" data-hover="Services"><img onclick="checkLogin(1);" id="finance" src="<%=request.getContextPath()%>/resources/img/test/navFinance.png"></a></li>
+				<li><a href="#" data-hover="Shortcodes"><img onclick="checkLogin(2);" id="safe" src="<%=request.getContextPath()%>/resources/img/test/navSafe.png"></a></li>
 				<li><a href="news.html" data-hover="Portfolio"><img id="news" src="<%=request.getContextPath()%>/resources/img/test/navNews.png"></a></li>
 				<li class="loginDiv">
 					<img src="<%=request.getContextPath()%>/resources/img/test/btnLogin.png" id="login_a">

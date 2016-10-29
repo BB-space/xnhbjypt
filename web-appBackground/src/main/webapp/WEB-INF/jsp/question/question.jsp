@@ -5,119 +5,7 @@
 <link href="<%=request.getContextPath()%>/resources/css/test/style1.css" rel="stylesheet" type="text/css" media="all"/>
 <link href="<%=request.getContextPath()%>/resources/css/test/style4.css" rel="stylesheet" type="text/css" media="all"/>
 <jsp:include page="../test/head.jsp"></jsp:include>
-<style type="text/css">
-.coinBoxBody {
-	background: none repeat scroll 0 0 #ffffff;
-	*padding: 4px 3px;
-	padding: 0 10px;
-}
-.security li{
-    padding: 10px 0;
-}
-li span.c1 {
-    display: inline-block;
-    width: 180px;
-    text-align: right;
-    padding-right: 20px;
-}
-
-.inputStyle {
-    height: 25px;
-}
-.red {
-    color: red;
-}
-.buttonblue3 {
-	display: inline-block;
-	font-weight: 700;
-	font-size: 14px;
-	color: #fff;
-	text-align: center;
-	width: 120px;
-	height: 32px;
-	line-height: 32px;
-	background: #ec5322;
-	margin-left: 120px;
-	border-radius: 3px
-}
-//-----------
-.Areacon {
-	font-size: 14px;
-	background: #fff;
-	border: 1px solid #e1e1e2;
-	padding: 30px 30px 0;
-	float: left;
-	width: 953px;
-	min-height: 542px;
-}
-.clear {
-    zoom: 1;
-    clear: both;
-}
-.Tentitle {
-	line-height: 35px;
-	font-weight: 700;
-	font-size: 14px;
-	padding: 10px 10px;
-	background: #fff;
-}
-.coinBoxBody {
-	background: none repeat scroll 0 0 #ffffff;
-	*padding: 4px 3px;
-	padding: 0 10px;
-}
-.userSetBtn {
-	display: inline-block;
-	font-weight: 700;
-	font-size: 14px;
-	color: #fff;
-	text-align: center;
-	width: 120px;
-	height: 32px;
-	line-height: 32px;
-	background-color: #66b2e3;
-	border-radius: 3px;
-}
-
-//question
-.initiateProblem{
-	background:none repeat scroll 0 0 #ffffff;
-	padding:0 10px;
-}
-.initiateProblem .specificContent{
-	width:740px;
-	padding-left:20px;
-	padding-top:10px;
-	height: 250px;
-}
-.questionButtonblue{
-	display:inline-block;
-	font-weight:700;
-	font-size:14px;
-	color:#fff;
-	text-align:center;
-	width:150px;
-	height:32px;
-	line-height:32px;
-	background-color:#66b2e3;
-	margin:30px 0 76px 180px;
-	border-radius: 3px;
-}
-pan.c2 {
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 700;
-    padding-left: 20px;
-    text-align: left;
-}
-
-#specificContent ul li {
-    line-height: 35px;
-    float: left;
-    padding-bottom: 10px;
-}
-
-</style>
+<link href="<%=request.getContextPath()%>/resources/css/test/question.css" rel="stylesheet" type="text/css" media="all"/>
 <script type="text/javascript">
 
 $(function(){
@@ -129,26 +17,38 @@ $(function(){
 	$("#news").attr('src', "<%=request.getContextPath()%>/resources/img/test/navNews.png"); 
 });
 
-
-
-
-//修改用户昵称
-function submitUserinfoForm(){
-	var old_nickName = '${sessionScope.frontUserM.nickName}';
-	var new_nickName = $('#nickName').val();
-	
-	if(new_nickName == old_nickName)
+//提交问题
+function submitQuestion(){
+	var questionType = $('#questionType').val();
+	var questionCentent = $('#questionCentent').val();
+	var questionUser = trim($('#questionUser').val());
+	var question_mobile = $('#question_mobile').val();
+	if(questionType == "-1"){
+		$('#errorMsg').html('请选择问题类型。');
 		return;
+	}
+	if(questionCentent == ""){
+		$('#errorMsg').html('请输入问题描述。 ');
+		return;
+	}
+	if(questionUser == ""){
+		$('#errorMsg').html('请输入姓名。  ');
+		return;
+	}
+	if(question_mobile == ""){
+		$('#errorMsg').html('请输入正确的电话号码。  ');
+		return;
+	}
 	
-	var dataPara = $('#userinfoForm').serializeArray();
+	var dataPara = $('#submitQuestionForm').serializeArray();
 	$.ajax({
-		url : '${pageContext.request.contextPath}/safe.do?updateNickName',
+		url : '${pageContext.request.contextPath}/question.do?submitQuestion',
 		type : 'post',
 		data : dataPara,
 		success : function(data) {
 			var d = $.parseJSON(data);
 			if (d.success == true) {
-				console.info('${sessionScope.frontUserM.nickName}');
+				window.location.href = "${pageContext.request.contextPath}/question.do?questionColumn";
 			} 
 		}
 	});
@@ -169,15 +69,15 @@ function submitUserinfoForm(){
 		<a href="<%=request.getContextPath()%>/safe.do?safeSetting" ><img src="<%=request.getContextPath()%>/resources/img/test/safe_ico1.png" />安全设置<i></i></a>
 		<a href="<%=request.getContextPath()%>/safe.do?userSetting"><img src="<%=request.getContextPath()%>/resources/img/test/safe_ico2.png" />用户设置<i></i></a>
 		<a href="#" class="hover"><img src="<%=request.getContextPath()%>/resources/img/test/safe_ico3.png" />发起问题<i></i></a>
-		<a href="<%=request.getContextPath()%>/safe.do?questionColumn"><img src="<%=request.getContextPath()%>/resources/img/test/safe_ico4.png" />问题列表<i></i></a>
-		<a href="<%=request.getContextPath()%>/safe.do?message" class="bottom"><img src="<%=request.getContextPath()%>/resources/img/test/safe_ico5.png" />消息中心<i></i></a>
+		<a href="<%=request.getContextPath()%>/question.do?questionColumn"><img src="<%=request.getContextPath()%>/resources/img/test/safe_ico4.png" />问题列表<i></i></a>
+		<a href="#" class="bottom"><img src="<%=request.getContextPath()%>/resources/img/test/safe_ico5.png" />消息中心<i></i></a>
 	</div>
 	
 	<div class="safe_section" id="ask_question" style="display: block;">
 	
 		<div class="initiateProblem">
 			<div class="specificContent">
-				<form method="post" id="askQuestionForm" >
+				<form method="post" id="submitQuestionForm" >
 				<ul>
 					<li>
 						<span class="c1">
@@ -185,7 +85,7 @@ function submitUserinfoForm(){
 							问题类型:
 						</span>
 						<span class="c2">
-							<select id="questionType">
+							<select id="questionType" name="questionType">
 								<option value="-1">
 									---请选择问题类型---
 								</option>
@@ -206,7 +106,7 @@ function submitUserinfoForm(){
 						</span>
 						<span style="float:left;" id="" class="c2">
 							<span>
-								<textarea onblur="trimValue(this);" rows="4" cols="50" class="textarea" id="desc" style="resize: none"></textarea>
+								<textarea id="questionCentent" name="questionCentent" rows="4" cols="50" class="textarea" id="desc" style="resize: none"></textarea>
 							</span>
 						</span>
 					</li>
@@ -216,7 +116,7 @@ function submitUserinfoForm(){
 							姓名:
 						</span>
 						<span class="c2">
-							<input type="text" onblur="trimValue(this);" name="" value="李时岐" class="blankInformation" id="name">
+							<input id="questionUser" name="questionUser" type="text" class="blankInformation">
 						</span>
 					</li>
 					<li>
@@ -225,7 +125,7 @@ function submitUserinfoForm(){
 							联系电话:
 						</span>
 						<span class="c2">
-							<input type="text" onkeyup="value=value.replace(/[^\d]/g,'')" name="" value="" class="blankInformation" id="phone">
+							<input id="question_mobile" name="mobile" type="text" onkeyup="value=value.replace(/[^\d]/g,'')"  class="blankInformation" >
 						</span>
 					</li>
 				</ul>

@@ -56,9 +56,17 @@ public class TestController extends BaseController{
 		System.out.println(user);
 		Json j = new Json();
 		
+		if("mobile".equals(user.getRegType())){
+			if(!"888888".equals(user.getMobileCheckCode())){	//手机验证码不正确
+				j.setSuccess(false);
+				j.setMsg("1");
+				return j;
+			}
+		}
+		
 		FrontUserM frontUserM = frontUserService.register(user);
 		if (frontUserM != null) {
-			session.setAttribute("userM", frontUserM);
+			session.setAttribute("frontUserM", frontUserM);
 			j.setMsg("注册成功!");
 			j.setSuccess(true);
 			j.setObj(frontUserM);

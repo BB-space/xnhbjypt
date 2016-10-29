@@ -27,10 +27,10 @@ public class SafeController extends BaseController{
 			//检查用户是否实名认证
 			boolean b = frontUserService.certification(frontUserM.getId());
 			if(b){  //已经实名认证
-				
+				return "/safe/safe_safeSetting";
 			}
 		}
-		return "/safe/safe_safeSetting";
+		return "/safe/safe_userSetting";
 	}
 	
 	@RequestMapping(params="userSetting")
@@ -39,12 +39,6 @@ public class SafeController extends BaseController{
 		return "/safe/safe_userSetting";
 	}
 
-	@RequestMapping(params="question")
-	public String question(HttpSession session) {
-		
-		return "/safe/question";
-	}
-	
 	/**
 	 * 用户设置--实名认证
 	 * @param user

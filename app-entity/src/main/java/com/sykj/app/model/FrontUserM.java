@@ -24,7 +24,7 @@ public class FrontUserM {
 	private String checkCode; //图片验证码
 	private String regType; //注册类型 mobile/email
 	
-	private String oldPassword; //就密码
+	private String oldPassword; //旧密码
 	
 	
 	@Override

@@ -9,21 +9,28 @@ import java.util.Date;
 public class FrontUser  implements java.io.Serializable {
 
 	private String id;//
-	private String userName;//手机号码/邮箱地址
-	private String password;//密码
 	private Date createTime;//创建时间
 	private Date updateTime;//更新时间
+	private String createUser; //创建人
+	private String updateUser;//修改人
+	private String userName;//手机号码/邮箱地址
+	private String password;//密码
+	private String description; //描述
 	
 	public FrontUser(){
 		
 	}
-	public FrontUser(String id, String userName, String password, Date createTime, Date updateTime) {
+	public FrontUser(String id, Date createTime, Date updateTime, String createUser, String updateUser, String userName,
+			String password, String description) {
 		super();
 		this.id = id;
-		this.userName = userName;
-		this.password = password;
 		this.createTime = createTime;
 		this.updateTime = updateTime;
+		this.createUser = createUser;
+		this.updateUser = updateUser;
+		this.userName = userName;
+		this.password = password;
+		this.description = description;
 	}
 	public String getId() {
 		return id;
@@ -54,6 +61,24 @@ public class FrontUser  implements java.io.Serializable {
 	}
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+	public String getCreateUser() {
+		return createUser;
+	}
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+	public String getUpdateUser() {
+		return updateUser;
+	}
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 }

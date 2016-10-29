@@ -62,7 +62,8 @@ public class FrontUserServiceImpl extends BaseServiceImpl implements FrontUserSe
 			frontUserInfo.setUid(uid + 1);
 			frontUserInfo.setUuid(UUID.randomUUID().toString());
 			frontUserInfo.setUserId(fu.getId());
-			frontUserInfo.setLastModiTime(new Date());
+			frontUserInfo.setMembeLevel(0);
+			frontUserInfo.setCreateTime(new Date());
 			frontUserInfoDao.add(frontUserInfo);
 			
 			if("email".equals(fum.getRegType())){
@@ -160,7 +161,7 @@ public class FrontUserServiceImpl extends BaseServiceImpl implements FrontUserSe
 				if(uuid.equals(fui.getUuid())){
 					//激活成功， //并更新用户的激活状态，为已激活 
 					fui.setEmailStatus("1");
-					fui.setLastModiTime(new Date());
+					fui.setUpdateTime(new Date());
 					frontUserInfoDao.update(fui);
 					return 0;
 				}else {
@@ -193,7 +194,7 @@ public class FrontUserServiceImpl extends BaseServiceImpl implements FrontUserSe
 			fui.setRealName(m.getRealName().trim());
 			fui.setCardType(m.getCardType());
 			fui.setCardNumber(m.getCardNumber().trim());
-			fui.setLastModiTime(new Date());
+			fui.setUpdateTime(new Date());
 			frontUserInfoDao.update(fui);
 		}
 	}
@@ -204,7 +205,7 @@ public class FrontUserServiceImpl extends BaseServiceImpl implements FrontUserSe
 		FrontUserInfo fui = frontUserInfoDao.getFrontUserInfoByUserId(m.getId());
 		if(fui != null){
 			fui.setNickName(m.getNickName());
-			fui.setLastModiTime(new Date());
+			fui.setUpdateTime(new Date());
 			frontUserInfoDao.update(fui);
 		}
 	}
@@ -215,7 +216,7 @@ public class FrontUserServiceImpl extends BaseServiceImpl implements FrontUserSe
 		FrontUserInfo fui = frontUserInfoDao.getFrontUserInfoByUserId(m.getId());
 		if(fui != null){
 			fui.setEmail(m.getEmail());
-			fui.setLastModiTime(new Date());
+			fui.setUpdateTime(new Date());
 			frontUserInfoDao.update(fui);
 		}
 	}
@@ -228,7 +229,7 @@ public class FrontUserServiceImpl extends BaseServiceImpl implements FrontUserSe
 			fui.setMobile(m.getMobile());
 			fui.setLocation(m.getLocation());
 			fui.setMobileStatus(m.getMobileStatus());
-			fui.setLastModiTime(new Date());
+			fui.setUpdateTime(new Date());
 			frontUserInfoDao.update(fui);
 		}
 	}

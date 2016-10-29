@@ -43,7 +43,7 @@ public class FrontUserInfoDaoImpl extends BaseDao<FrontUserInfo> implements Fron
 
 	@Override
 	public int getMaxUID() {
-		String sql = "SELECT max(t.uid) from xnhb_user_info t ";
+		String sql = "SELECT max(t.uid) from xnhb_user_userinfo t ";
 		List<Object> list = this.findSQL(sql);
 		if(list.get(0) != null){
 			return (int) list.get(0);
@@ -53,7 +53,9 @@ public class FrontUserInfoDaoImpl extends BaseDao<FrontUserInfo> implements Fron
 
 	@Override
 	public FrontUserInfo certifiUser(String userId) {
-		return this.get("from FrontUserInfo t where t.userId='"+userId+ "' and t.realName is not null and t.cardNumber is not null");
+		return this.get("from FrontUserInfo t where t.userId='"+userId+ "'"
+				+ " and t.realName is not null and t.realName != ''"
+				+ " and t.cardNumber is not null and t.cardNumber != ''");
 	}
 
 }
