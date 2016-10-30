@@ -266,10 +266,6 @@
  				success : function(data) {
  					var d = $.parseJSON(data);
  					if (d.success == true) {
-
- 						console.info('${sessionScope}');
- 						console.info('${sessionScope.frontUserM}');
- 						
  						$(".lg_win .res").click();
  						$('.loginDiv').hide();
  						$('.login_after').show();
@@ -294,7 +290,6 @@
 	//注册
  	function regSubmit(regType) {
 		var dataPara;
-		
 		if(regType == '1'){  //手机注册
 			$("#reg_mobile").blur();
 			$("#reg_mobileCheckCode").blur();
@@ -305,6 +300,13 @@
 			if(!((mark.regMobile&&mark.regMobileCheckCode&&mark.regPasswordMobile&&mark.regRePasswordMobile&&mark.regCheckCodeMobile)))
 				return;
 			
+			if(!$("#user_agreement_mobile").is(':checked')){
+				$('#err_user_agreement_mobile').css("display","block");
+				return;
+			}else {
+				$('#err_user_agreement_mobile').css("display","none");
+			}
+			
 			dataPara = $('#regForm1').serializeArray();
 		}else if(regType == '2'){  //邮箱注册
 			$("#reg_email").blur();
@@ -314,6 +316,14 @@
 			
 			if(!((mark.regEmail&&mark.regPasswordEmail&&mark.regRePasswordEmail&&mark.regCheckCodeEmail)))
 				return;
+			
+			if(!$("#user_agreement_email").is(':checked')){
+				$('#err_user_agreement_email').show();
+				return;
+			}else {
+				$('#err_user_agreement_email').hide();
+			}
+			
 			dataPara = $('#regForm2').serializeArray();
 		}
 		
@@ -332,6 +342,8 @@
 					$('#li_userName').html('用户名：'+d.obj.userName);
 					$('#li_UID').html('UID　 ：'+d.obj.uid);
 					$('#li_totalMoney').html('总资产：<span class="red">￥'+d.obj.totalMoney+'</span>');
+					
+					$.session.set("login", "true");
 				} else {
 					if(d.msg = '1'){	//验证码不正确
 						$('#err_reg_mobileCheckCode').html("验证码不正确！").addClass("Validform_checktip Validform_wrong");
@@ -393,7 +405,7 @@
 	function checkLogin(part){
 		var location = '';
 		if(part == 1){
-			location = "${pageContext.request.contextPath}/finance.do?finance";
+			location = "${pageContext.request.contextPath}/finance.do?index";
 		}else if(part == 2){
 			location = "${pageContext.request.contextPath}/safe.do?safeSetting";
 		}
@@ -485,10 +497,10 @@
              <nav class="cl-effect-11">
               <ul class="nav navbar-nav">
                 <li><a href="<%=request.getContextPath()%>/test.do?index" data-hover="Home"><img id="index" src="<%=request.getContextPath()%>/resources/img/test/navHome2.png"></a></li>
-				<li><a href="trade.html" data-hover="About"><img id="trade" src="<%=request.getContextPath()%>/resources/img/test/navTrade.png"></a></li>
+				<li><a href="<%=request.getContextPath()%>/trade.do?index" data-hover="About"><img id="trade" src="<%=request.getContextPath()%>/resources/img/test/navTrade.png"></a></li>
 				<li><a href="#" data-hover="Services"><img onclick="checkLogin(1);" id="finance" src="<%=request.getContextPath()%>/resources/img/test/navFinance.png"></a></li>
 				<li><a href="#" data-hover="Shortcodes"><img onclick="checkLogin(2);" id="safe" src="<%=request.getContextPath()%>/resources/img/test/navSafe.png"></a></li>
-				<li><a href="news.html" data-hover="Portfolio"><img id="news" src="<%=request.getContextPath()%>/resources/img/test/navNews.png"></a></li>
+				<li><a href="<%=request.getContextPath()%>/news.do?index" data-hover="Portfolio"><img id="news" src="<%=request.getContextPath()%>/resources/img/test/navNews.png"></a></li>
 				<li class="loginDiv">
 					<img src="<%=request.getContextPath()%>/resources/img/test/btnLogin.png" id="login_a">
 					<img src="<%=request.getContextPath()%>/resources/img/test/btnReg.png" id="reg_a">
@@ -532,7 +544,7 @@
 				</div>
 				<div class="rem">
 					<label>
-						<input type="checkbox" class="chk" checked="checked" />
+						<input name="remember_password" type="checkbox" class="chk" checked="checked" />
 						记住登录	
 					</label>
 					<a href="#" class="forget_a">忘记密码？</a>
@@ -592,9 +604,11 @@
 				</div>
 				<div class="rem">
 					<label>
-						<input type="checkbox" class="chk" checked="checked" />
+						<input id="user_agreement_mobile" type="checkbox" class="chk" checked="checked" />
 						已阅读并同意<a href="#" class="xy_a">用户协议</a>
-					</label>					
+						<br>					
+						<span id='err_user_agreement_mobile' class="Validform_checktip Validform_wrong" style="display:none">请阅读并同意用户协议！</span>
+					</label>
 					<div class="clear"></div>	
 				</div>	
 				
@@ -640,8 +654,10 @@
 				</div>
 				<div class="rem">
 					<label>
-						<input type="checkbox" class="chk" checked="checked" />
+						<input id="user_agreement_email" type="checkbox" class="chk" checked="checked" />
 						已阅读并同意<a href="#" class="xy_a">用户协议</a>
+						<br>
+						<span id='err_user_agreement_email' class="Validform_checktip Validform_wrong" style="display:none">请阅读并同意用户协议！</span>
 					</label>					
 					<div class="clear"></div>	
 				</div>	

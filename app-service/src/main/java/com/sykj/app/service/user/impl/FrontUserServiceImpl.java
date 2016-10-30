@@ -236,6 +236,7 @@ public class FrontUserServiceImpl extends BaseServiceImpl implements FrontUserSe
 
 	@Override
 	public int changePassword(FrontUserM m) {
+		System.out.println(m);
 		FrontUser fu = frontUserDao.getUser(m.getId());
 		if(fu != null){
 			fu.setPassword(SecurityUtil.md5(m.getPassword()));
@@ -243,6 +244,31 @@ public class FrontUserServiceImpl extends BaseServiceImpl implements FrontUserSe
 			frontUserDao.update(fu);
 		}
 		return 0;
+	}
+
+	@Override
+	public boolean checkBoundMobile(String mobile) {
+		FrontUserInfo fui = frontUserInfoDao.checkBoundMobile(mobile);
+		if(fui != null)
+			return true;
+		return false;
+	}
+
+	@Override
+	public boolean checkBoundEmail(String email) {
+		FrontUserInfo fui = frontUserInfoDao.checkBoundEmail(email);
+		if(fui != null)
+			return true;
+		return false;
+	}
+
+	@Override
+	public boolean checkPassword(String userName, String password) {
+		password = SecurityUtil.md5(password);
+		FrontUser fui = frontUserDao.getUserByNamePassword(userName, password);
+		if(fui != null)
+			return true;
+		return false;
 	}
 	
 	

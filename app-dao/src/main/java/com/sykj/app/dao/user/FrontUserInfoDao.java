@@ -46,4 +46,18 @@ public interface FrontUserInfoDao extends IBaseDao<FrontUserInfo>{
 	 */
 	public FrontUserInfo certifiUser(String userId);
 	
+	/**
+	 * 校验绑定手机是否存在
+	 * @param mobile
+	 * @return
+	 */
+	public FrontUserInfo checkBoundMobile(String mobile); 
+	
+	/**
+	 * 校验绑定邮箱是否存在
+	 * @param mobile
+	 * @return
+	 */
+	public FrontUserInfo checkBoundEmail(String email); 
+	
 }

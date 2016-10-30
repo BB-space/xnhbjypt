@@ -196,16 +196,74 @@ public class SafeController extends BaseController{
 	@ResponseBody
 	public Json changePassword(FrontUserM fum, HttpSession session,
 			HttpServletRequest req,HttpServletResponse response) {
+		System.out.println(fum);
 		Json j = new Json();
 		FrontUserM frontUserM = (FrontUserM) session.getAttribute("frontUserM");
 		if(frontUserM != null){
-			
+			frontUserM.setPassword(fum.getPassword());
 			frontUserService.changePassword(frontUserM);
 			session.setAttribute("frontUserM", frontUserM);
 			j.setSuccess(true);
 			j.setObj(frontUserM);
 		}else {
 			j.setSuccess(false);
+		}
+		return j;
+	}
+	
+	/**
+	 * 校验绑定手机是否存在
+	 * @param mobile
+	 * @param session
+	 * @param req
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(params="checkBoundMobile")
+	@ResponseBody
+	public Json checkBoundMobile(String mobile, HttpSession session,
+			HttpServletRequest req,HttpServletResponse response) {
+		Json j = new Json();
+		boolean b = frontUserService.checkBoundMobile(mobile);
+		j.setSuccess(b);
+		return j;
+	}
+	
+	/**
+	 * 校验绑定邮箱是否存在
+	 * @param mobile
+	 * @param session
+	 * @param req
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(params="checkBoundEmail")
+	@ResponseBody
+	public Json checkBoundEmail(String email, HttpSession session,
+			HttpServletRequest req,HttpServletResponse response) {
+		Json j = new Json();
+		boolean b = frontUserService.checkBoundEmail(email);
+		j.setSuccess(b);
+		return j;
+	}
+	
+	/**
+	 * 校验原密码
+	 * @param email
+	 * @param session
+	 * @param req
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(params="checkPassword")
+	@ResponseBody
+	public Json checkPassword(String password, HttpSession session,
+			HttpServletRequest req,HttpServletResponse response) {
+		Json j = new Json();
+		FrontUserM frontUserM = (FrontUserM) session.getAttribute("frontUserM");
+		if(frontUserM != null){
+			boolean b = frontUserService.checkPassword(frontUserM.getUserName(), password);
+			j.setSuccess(b);
 		}
 		return j;
 	}

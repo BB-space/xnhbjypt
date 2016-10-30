@@ -58,4 +58,15 @@ public class FrontUserInfoDaoImpl extends BaseDao<FrontUserInfo> implements Fron
 				+ " and t.cardNumber is not null and t.cardNumber != ''");
 	}
 
+	@Override
+	public FrontUserInfo checkBoundMobile(String mobile) {
+		
+		return this.get("from FrontUserInfo t where t.mobile='"+mobile+ "'");
+	}
+
+	@Override
+	public FrontUserInfo checkBoundEmail(String email) {
+		return this.get("from FrontUserInfo t where t.email='"+email+ "'");
+	}
+
 }

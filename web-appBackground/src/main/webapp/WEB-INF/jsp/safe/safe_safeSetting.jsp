@@ -67,7 +67,47 @@ function validatePhone(){
 
 //绑定手机
 function mobileBound(){
-
+	//校验绑定手机
+	var mobile = trim($("#bound_mobile").val());
+	if(mobile == ''){
+		$('#err_bound_mobile').html("请填写信息！").addClass("Validform_checktip Validform_wrong");
+		return;
+	}else if(!checkMobile(mobile)){
+		$('#err_bound_mobile').html("请输入手机号！").addClass("Validform_checktip Validform_wrong");
+		return;
+	}else{
+		var dataPara = {userName:mobile};
+		//校验号码是否已经注册
+		$.ajax({
+			url : '${pageContext.request.contextPath}/safe.do?checkBoundMobile',
+			type : 'post',
+			data : dataPara,
+			success : function(data) {
+				var d = $.parseJSON(data);
+				if (d.success == true) {
+					$('#err_bound_mobile').html("手机号已存在！").addClass("Validform_checktip Validform_wrong");
+					return;
+				}else {
+					$('#err_bound_mobile').html("通过信息验证！").removeClass("Validform_checktip Validform_wrong")
+						.addClass("Validform_checktip Validform_right");
+				}
+			}
+		});
+	}
+	
+	//校验验证码
+	var mobileCheckCode = trim($("#bound_mobileCheckCode").val());
+	if(mobileCheckCode == ''){
+		$('#err_bound_mobileCheckCode').html("请填写信息！").addClass("Validform_checktip Validform_wrong");
+		return;
+	}else if(!checkMobileCheckCode(mobileCheckCode)){
+		$('#err_bound_mobileCheckCode').html("请输入6位验证码！").addClass("Validform_checktip Validform_wrong");
+		return;
+	}else{
+		$('#err_bound_mobileCheckCode').html("通过信息验证！").removeClass("Validform_checktip Validform_wrong")
+			.addClass("Validform_checktip Validform_right");
+	}
+	
 	var dataPara = $('#mobileBoundForm').serializeArray();
 	$.ajax({
 		url : '${pageContext.request.contextPath}/safe.do?mobileBound',
@@ -99,7 +139,19 @@ function mobileBound(){
 
 //解绑手机
 function mobileUnbound(){
-
+	
+	var mobileCheckCode = trim($("#unbound_mobileCheckCode").val());
+	if(mobileCheckCode == ''){
+		$('#err_unbound_mobileCheckCode').html("请填写信息！").addClass("Validform_checktip Validform_wrong");
+		return;
+	}else if(!checkMobileCheckCode(mobileCheckCode)){
+		$('#err_unbound_mobileCheckCode').html("请输入6位验证码！").addClass("Validform_checktip Validform_wrong");
+		return;
+	}else{
+		$('#err_unbound_mobileCheckCode').html("通过信息验证！").removeClass("Validform_checktip Validform_wrong")
+			.addClass("Validform_checktip Validform_right");
+	}
+	
 	var dataPara = $('#mobileUnboundForm').serializeArray();
 	$.ajax({
 		url : '${pageContext.request.contextPath}/safe.do?mobileUnbound',
@@ -121,6 +173,10 @@ function mobileUnbound(){
 				$("#alert_flog").hide();
 				$("#mobile_unbound").hide();
 				$('#mobileUnboundForm')[0].reset();
+			} else {
+				if(d.msg = '1'){	//验证码不正确
+					$('#err_unbound_mobileCheckCode').html("验证码不正确！").addClass("Validform_checktip Validform_wrong");
+				}
 			}
 		}
 	});
@@ -135,6 +191,34 @@ function validateEmail(){
 
 //绑定邮箱
 function emailBound(){
+	
+	var email = trim($("#bound_email").val());
+	if(email == ''){
+		$('#err_bound_email').html("请填写信息！").addClass("Validform_checktip Validform_wrong");
+		return;
+	}else if(!checkEmail(email)){
+		$('#err_bound_email').html("请输入邮箱！").addClass("Validform_checktip Validform_wrong");
+		return;
+	}else{
+		var dataPara = {userName:email};
+		//校验号码是否已经注册
+		$.ajax({
+			url : '${pageContext.request.contextPath}/safe.do?checkBoundEmail',
+			type : 'post',
+			data : dataPara,
+			success : function(data) {
+				var d = $.parseJSON(data);
+				if (d.success == true) {
+					$('#err_bound_email').html("邮箱已存在！").addClass("Validform_checktip Validform_wrong");
+					return;
+				}else {
+					$('#err_bound_email').html("通过信息验证！").removeClass("Validform_checktip Validform_wrong")
+						.addClass("Validform_checktip Validform_right");
+				}
+			}
+		});
+	}
+	
 	var dataPara = $('#emailBoundForm').serializeArray();
 	$.ajax({
 		url : '${pageContext.request.contextPath}/safe.do?emailBound',
@@ -168,6 +252,71 @@ function validateLoginPassword(){
 //修改登录密码
 function changePassword(){
 	
+	//旧密码
+	var password = $("#chg_oldPassword").val();
+	if(password == ''){
+		$('#err_chg_oldPassword').html("请填写信息！").addClass("Validform_checktip Validform_wrong");
+		return;
+	}else if((password.length < 6) || (password.length > 16)){
+		$('#err_chg_oldPassword').html("请输入6-16位密码！").addClass("Validform_checktip Validform_wrong");
+		return;
+	}else{
+		var dataPara = {password:password};
+		//校验号码是否已经注册
+		$.ajax({
+			url : '${pageContext.request.contextPath}/safe.do?checkPassword',
+			type : 'post',
+			data : dataPara,
+			success : function(data) {
+				var d = $.parseJSON(data);
+				if (d.success == false) {
+					$('#err_chg_oldPassword').html("原密码不正确！").addClass("Validform_checktip Validform_wrong");
+					return;
+				}else {
+					$('#err_chg_oldPassword').html("通过信息验证！").removeClass("Validform_checktip Validform_wrong")
+						.addClass("Validform_checktip Validform_right");
+				}
+			}
+		});
+	}
+	
+	//新密码
+	var password = $("#chg_password").val();
+	if(password == ''){
+		$('#err_chg_password').html("请填写信息！").addClass("Validform_checktip Validform_wrong");
+		return;
+	}else if((password.length < 6) || (password.length > 16)){
+		$('#err_chg_password').html("请输入6-16位密码！").addClass("Validform_checktip Validform_wrong");
+		return;
+	}else{
+		$('#err_chg_password').html("通过信息验证！").removeClass("Validform_checktip Validform_wrong")
+			.addClass("Validform_checktip Validform_right");
+	}
+	
+	//再次输入新密码
+	var password = $("#chg_password").val();
+	var repassword = $("#chg_repassword").val();
+	if(repassword != password){
+		$('#err_chg_repassword').html("两次输入密码不一至").addClass("Validform_checktip Validform_wrong");
+		return;
+	}else{
+		$('#err_chg_repassword').html("通过信息验证！").removeClass("Validform_checktip Validform_wrong")
+			.addClass("Validform_checktip Validform_right");
+	}
+	
+	//输入校验码
+	var mobileCheckCode = trim($("#chg_mobileCheckCode").val());
+	if(mobileCheckCode == ''){
+		$('#err_chg_mobileCheckCode').html("请填写信息！").addClass("Validform_checktip Validform_wrong");
+		return;
+	}else if(!checkMobileCheckCode(mobileCheckCode)){
+		$('#err_chg_mobileCheckCode').html("请输入6位验证码！").addClass("Validform_checktip Validform_wrong");
+		return;
+	}else{
+		$('#err_chg_mobileCheckCode').html("通过信息验证！").removeClass("Validform_checktip Validform_wrong")
+			.addClass("Validform_checktip Validform_right");
+	}
+	
 	
 	var dataPara = $('#chgPasswordForm').serializeArray();
 	$.ajax({
@@ -177,7 +326,8 @@ function changePassword(){
 		success : function(data) {
 			var d = $.parseJSON(data);
 			if (d.success == true) {
-				
+				$("#alert_flog").hide();
+				$("#chg_login_password").hide();
 			}
 		}
 	});
@@ -202,7 +352,7 @@ function validateTradePassword(){
 function changeTradePassword(){
 	
 	
-	var dataPara = $('#chgPasswordForm').serializeArray();
+	var dataPara = $('#chgTradePasswordForm').serializeArray();
 	$.ajax({
 		url : '${pageContext.request.contextPath}/safe.do?changeTradePassword',
 		type : 'post',
@@ -299,7 +449,7 @@ function changeTradePassword(){
 				<div class="in">
 					<span class="qh">+86</span>
 					<input id="bound_mobile" name="mobile" type="text" class="text text_tel" placeholder="请输入你的手机号码"/>	
-					<span id='err_reg_mobile'></span>
+					<span id='err_bound_mobile'></span>
 				</div>
 				<div class="line25"></div>
 				<div class="in">
@@ -390,7 +540,7 @@ function changeTradePassword(){
 		</div>
 		
 		<div class="lgwin_wrap">
-			<form id="chgPasswordFrom" name="chgPasswordFrom" method="post">
+			<form id="chgPasswordForm" name="chgPasswordForm" method="post">
 				<div class="line25"></div>
 				<div class="email_tip">
 					<span>警告：</span> 登录密码不要与交易密码或其他网站密码一致，由此产生的账号被盗，本站概不负责。	
@@ -439,7 +589,7 @@ function changeTradePassword(){
 		</div>
 		
 		<div class="lgwin_wrap">
-			<form id="chgTradePasswordFrom" name="chgTradePasswordFrom" method="post">
+			<form id="chgTradePasswordForm" name="chgTradePasswordForm" method="post">
 				<div class="line25"></div>
 				<div class="email_tip">
 					<span>警告：</span> 交易密码不要与登陆密码或其他网站密码一致，由此产生的账号被盗，本站概不负责。	

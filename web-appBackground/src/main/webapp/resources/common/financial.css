@@ -1,0 +1,325 @@
+.index .cny-item {
+	height: 70px;
+	padding-top: 25px;
+	border-bottom: #e8e7e7 solid 1px;
+}
+
+.index .cny-item .item1 {
+	width: 250px;
+	height: 50px;
+	line-height: 50px;
+	float: left;
+	border-right: #e4e4e4 1px dashed;
+}
+
+.index .cny-item .item2 {
+	width: 210px;
+	height: 50px;
+	line-height: 50px;
+	float: left;
+	border-right: #e4e4e4 1px dashed;
+}
+
+.index .cny-item .item3 {
+	width: 210px;
+	height: 50px;
+	float: left;
+	display: inline-block;
+}
+
+.index .cny-item .item4 {
+	width: 250px;
+	height: 36px;
+	float: left;
+	display: inline-block;
+	text-align: right;
+	padding: 7px 0;
+}
+
+.index .cny-item span.lineheight25 {
+	display: block;
+	line-height: 25px;
+	padding-left: 20px;
+}
+
+.index .cny-item span.lineheight50 {
+	display: block;
+	line-height: 50px;
+	padding-left: 20px;
+}
+
+.index .cny-item a.withdrawals {
+	line-height: 36px; font-size : 14px;
+	color: #0068b7;
+	padding: 0 10px;
+	float: right;
+	font-size: 14px;
+}
+
+.index .cny-item a.withdrawals:hover {
+	text-decoration: underline;
+}
+
+.index .cny-item a.recharge {
+	height: 36px;
+	line-height: 36px;
+	color: #fff;
+	cursor: pointer;
+	padding: 0 10px;
+	font-size: 16px;
+	text-align: center;
+	background: url(../static/front/images/common/commonplist.png) no-repeat 0 -190px transparent;
+	float: right;
+}
+
+.index .cny-item a.recharge:hover {
+	background: url(../static/front/images/common/commonplist.png) no-repeat 0 -250px transparent;
+}
+
+.recharge {
+	background: #fff;
+}
+
+.recharge .remitStep {
+	margin-bottom: 10px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.recharge .remitStep span {
+	text-align: center;
+	display: inline-block;
+	height: 50px;
+	width: 900px;
+}
+
+.specificStepHint{
+	display: inline-block;
+	height: 40px;
+	width: 900px;
+}
+
+.specificStepText{
+	text-align: center;
+	display: inline-block;
+	height: 40px;
+	line-height: 40px;
+	width: 268px;
+	float:left;
+	font-size:14px;
+	color:#A2A2A2;
+}
+.specificStepl{
+	width:169px;
+	text-align: left;
+}
+
+.specificStepr{
+	width:169px;
+	text-align: right;
+}
+
+.specificStepSel{
+	color:#66b2e3;
+}
+
+
+.recharge .remitStep span.specificStepBackground1 {
+	background: url("../static/front/images/recharge/progress.png") no-repeat scroll 0 -30px transparent;
+}
+
+.recharge .remitStep span.specificStepBackground2 {
+	background: url("../static/front/images/recharge/progress.png") no-repeat scroll 0 -133px transparent;
+}
+
+.recharge .remitStep span.specificStepBackground3 {
+	background: url("../static/front/images/recharge/progress.png") no-repeat scroll 0 -237px transparent;
+}
+
+.recharge .remitStep span.specificStepBackground4 {
+	background: url("../static/front/images/recharge/progress.png") no-repeat scroll 0 -339px transparent;
+}
+
+.recharge .numberBlock {
+	padding: 16px 0px 10px 10px;
+	width: 485px;
+	float: left;
+}
+
+.recharge .numberBlock li {
+	padding-bottom: 45px;
+}
+
+.recharge .numberBlock .num {
+	width: 295px;
+	color: #000;
+	height: 40px;
+	border: #777783 solid 1px;
+	outline: none;
+}
+
+.recharge  .info {
+	width: 200px;
+}
+
+.recharge .explainBlank {
+	padding-right: 20px;
+	width: 380px;
+	float: right;
+	line-height: 25px;
+	font-size: 14px;
+	float: left;
+}
+
+.recharge .numberBlock .item {
+	line-height: 40px; font-size : 16px;
+	padding-right: 5px;
+	color: #777783;
+	font-size: 16px;
+	min-width: 130px;
+    text-align: right;
+    float: left;
+    
+}
+
+.recharge .red {
+	color: #ea3a4f;
+}
+
+.recharge .button-blue2 {
+	display: inline-block;
+	font-weight: 700;
+	font-size: 14px;
+	color: #fff;
+	text-align: center;
+	width: 220px;
+	height: 32px;
+	line-height: 32px;
+	background: url(../static/front/images/common/commonplist.png) no-repeat 0 -190px transparent;
+}
+
+.recharge .button-blue2:hover {
+	background: url(../static/front/images/common/commonplist.png) no-repeat 0 -250px transparent;
+}
+
+.recharge .alipayhand {
+	line-height: 40px;
+	padding-left: 20px;
+}
+
+.recharge .alipayhand ul {
+	padding-left: 20px;
+}
+
+.recharge .alipayhand ul span.c1 {
+	display: inline-block;
+	width: 150px;
+	text-align: right;
+}
+
+.recharge .alipayhand ul span.c2 {
+	display: inline-block;
+	width: 265px;
+	padding-left: 20px;
+	font-weight: 700;
+	font-size: 14px;
+	text-align: left;
+}
+
+.recharge .alipayhand ul span.c3 {
+	display: inline-block;
+	padding-left: 20px;
+	text-align: left;
+}
+
+.recharge .alipayhand ul span.c4 {
+	padding-left: 90px;
+}
+
+.recharge .blankRemittance {
+	padding-left: 80px;
+}
+
+.recharge .blankRemittance .topTitle {
+	font-size: 20px;
+	color: #999999;
+	padding-bottom: 10px;
+	display: inline-block;
+	font-weight: 700;
+}
+
+.recharge .blankRemittance ul {
+	padding-left: 20px;
+}
+
+.recharge .blankRemittance ul li {
+	height: 35px;
+	line-height: 35px;
+	padding-bottom: 10px;
+}
+
+.recharge .blankRemittance ul li span.c1 {
+	display: inline-block;
+	text-align: right;
+	width: 150px;
+}
+
+.recharge .blankRemittance ul li span.c2 {
+	display: inline-block;
+	font-size: 14px;
+	font-weight: 700;
+	padding-left: 20px;
+	text-align: left;
+}
+
+.recharge .blankRemittance ul li span input.blankInformation {
+	height: 25px;
+	width: 220px;
+}
+
+.recharge  .blankRemittance .returnbackground {
+	color: #333333;
+	padding-left: 20px;
+	display: inline-block;
+	width: 666px;
+    padding-top: 12px;
+    line-height: 22px;
+}
+.recharge  .blankRemittance .returnbackground a{
+	color: #0068b7;
+}
+.recharge  .blankRemittance .returnbackground a:hover{
+	color: #da0112;
+}
+.recharge .blankRemittance ul li span label {
+	padding-left: 20px;
+}
+
+.recharge .blankRemittance .bankRechargeSucess {
+	background: url(../static/front/images/common/commonplist.png) no-repeat 0 -310px transparent;
+	margin-top: 10px;
+	width: 32px;
+	float: left;
+	height: 32px;
+	display: inline;
+}
+
+.recharge .blankRemittance .buttonblue3 {
+	display: inline-block;
+	font-weight: 700;
+	font-size: 14px;
+	color: #fff;
+	text-align: center;
+	width: 120px;
+	height: 32px;
+	line-height: 32px;
+	background: url(../static/front/images/common/commonplist.png) no-repeat 0 -190px transparent;
+	margin-left: 120px;
+	border-radius: 3px
+}
+
+.recharge .blankRemittance .buttonblue3:hover {
+	color: #fff;
+	text-decoration: none;
+	background: url(../static/front/images/common/commonplist.png) no-repeat 0 -250px transparent;
+}

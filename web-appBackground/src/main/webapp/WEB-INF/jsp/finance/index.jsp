@@ -4,15 +4,17 @@
 <html style="background:#f1f6f9;">
 <head>
 <link href="<%=request.getContextPath()%>/resources/css/test/style1.css" rel="stylesheet" type="text/css" media="all"/>
-<jsp:include page="./head.jsp"></jsp:include>
+<jsp:include page="../test/head.jsp"></jsp:include>
 <script type="text/javascript">
 
+$(function(){
 	//修改菜单头图片
 	$("#index").attr('src', "<%=request.getContextPath()%>/resources/img/test/navHome.png"); 
 	$("#trade").attr('src', "<%=request.getContextPath()%>/resources/img/test/navTrade.png"); 
 	$("#finance").attr('src', "<%=request.getContextPath()%>/resources/img/test/navFinance2.png"); 
 	$("#safe").attr('src', "<%=request.getContextPath()%>/resources/img/test/navSafe.png"); 
 	$("#news").attr('src', "<%=request.getContextPath()%>/resources/img/test/navNews.png"); 
+});
 
 </script>
 </head>
@@ -21,16 +23,18 @@
 <div class="ad_main">	
 	
 	<div class="ad_aside">
-		<a href="#" class="hover"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico1.png" />人民币充值<i></i></a>
-		<a href="#"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico2.png" />人民币提现<i></i></a>
-		<a href="#"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico3.png" />网络流通币充值<i></i></a>
-		<a href="#"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico4.png" />网络流通币提现<i></i></a>
-		<a href="#"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico5.png" />个人财务<i></i></a>
-		<a href="#"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico6.png" />账单明细<i></i></a>
-		<a href="#"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico7.png" />委托明细<i></i></a>
-		<a href="#"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico8.png" />发起问题<i></i></a>
-		<a href="#"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico9.png" />问题列表<i></i></a>
+	
+		<a href="<%=request.getContextPath()%>/finance.do?rechargeCny"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico1.png" />人民币充值<i></i></a>
+		<a href="<%=request.getContextPath()%>/finance.do?withdrawCny"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico2.png" />人民币提现<i></i></a>
+		<a href="<%=request.getContextPath()%>/finance.do?rechargeBtc"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico3.png" />网络流通币充值<i></i></a>
+		<a href="<%=request.getContextPath()%>/finance.do?withdrawBtc"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico4.png" />网络流通币提现<i></i></a>
+		<a href="#" class="hover"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico5.png" />个人财务<i></i></a>
+		<a href="<%=request.getContextPath()%>/finance.do?record"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico6.png" />账单明细<i></i></a>
+		<a href="<%=request.getContextPath()%>/finance.do?listentrust"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico7.png" />委托明细<i></i></a>
+		<a href="<%=request.getContextPath()%>/question.do?question"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico8.png" />发起问题<i></i></a>
+		<a href="<%=request.getContextPath()%>/question.do?questionCulmn"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico9.png" />问题列表<i></i></a>
 		<a href="#" class="end"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico10.png" />消息中心<i></i></a>
+		
 	</div>
 	
 	<table class="fina_tab">
@@ -144,7 +148,7 @@
 </div>
 
 <!--footer start here-->
-<jsp:include page="./footer.jsp"></jsp:include>
+<jsp:include page="../test/footer.jsp"></jsp:include>
 <!--footer end here-->
 
 </body>
