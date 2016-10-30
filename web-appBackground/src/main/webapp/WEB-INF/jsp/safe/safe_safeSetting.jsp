@@ -76,7 +76,7 @@ function mobileBound(){
 		$('#err_bound_mobile').html("请输入手机号！").addClass("Validform_checktip Validform_wrong");
 		return;
 	}else{
-		var dataPara = {userName:mobile};
+		var dataPara = {mobile:mobile};
 		//校验号码是否已经注册
 		$.ajax({
 			url : '${pageContext.request.contextPath}/safe.do?checkBoundMobile',
@@ -200,7 +200,7 @@ function emailBound(){
 		$('#err_bound_email').html("请输入邮箱！").addClass("Validform_checktip Validform_wrong");
 		return;
 	}else{
-		var dataPara = {userName:email};
+		var dataPara = {email:email};
 		//校验号码是否已经注册
 		$.ajax({
 			url : '${pageContext.request.contextPath}/safe.do?checkBoundEmail',
