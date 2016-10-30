@@ -88,7 +88,12 @@
 	padding: 10px 0;
 	vertical-align: middle;
 }
-
+.rightArea .riskArea span.hinttext1 {
+	vertical-align: middle;
+	color: #777783;
+	font-size: 14px;
+	line-height: 20px;
+}
 
 </style>
 <script type="text/javascript">

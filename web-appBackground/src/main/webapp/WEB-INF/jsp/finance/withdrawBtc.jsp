@@ -91,61 +91,56 @@
  .bigTitle {
 	display: block;
 }
-/******委托记录*********/
-.entrustTen {
-	
+.coinBoxBody {
+	background: none repeat scroll 0 0 #ffffff;
+	*padding: 4px 3px;
+	padding: 0 10px;
 }
-
-.gary {
-	color: #747373;
-}
-
-.entrustTen .Tentitle {
-	line-height: 35px;
-	font-weight: 700;
+.rightArea .riskArea .define {
 	font-size: 14px;
+	font-weight: 700;
+	color: #ff0000;
+}
+.rightArea .riskArea {
+	background: none repeat scroll 0 0 #fae5e7;
 	padding: 10px 0;
-	background: #fff;
+	vertical-align: middle;
 }
-
-.entrustTen .Tentitle .title {
-	height: 35px;
-	color: #66b2e3;
-	background: #f5f5f5;
+.rightArea .riskArea span.hinttext1 {
+	vertical-align: middle;
+	color: #777783;
+	font-size: 14px;
+	line-height: 20px;
+}
+.rightArea .riskArea span.hinttext {
 	display: block;
-	cursor: pointer;
+	line-height: 22px;
+	vertical-align: middle;
+	color: #777783;
+	font-size: 14px;
 }
-
-.entrustTen .Tenbody {
-	background: none repeat scroll 0 0 #FFFFFF;
-	display: none;
-	font-size: 12px;
-	padding-bottom: 45px;
+.coinBoxBody .rmbout {
+	padding: 10px 0;
+	color: #777783;
 }
-
-.entrustTen .Tenbody table {
-	text-align: center;
-	border-left: none;
+.coinBoxBody .rmbout div.divMargins {
+	padding: 2px 0;
 }
-
-.entrustTen .Tenbody table th {
-	color: #747373;
+.coinBoxBody .rmbout .c1 {
+	display: inline-block;
+	width: 156px;
+	height: 30px;
+	text-align: right;
+	padding-right: 10px;
 	line-height: 30px;
-	font-weight: normal;
 }
-
-.entrustTen .Tenbody table td {
-	color: #747373;
+.coinBoxBody .rmbout .c2 {
+	display: inline-block;
+	width: 156px;
+	height: 30px;
+	text-align: right;
+	padding-right: 13px;
 	line-height: 30px;
-	border-top: 1px solid #e4e4e4;
-}
-
-.entrustTen .Tenbody table td.green {
-	color: #009900;
-}
-
-.entrustTen .Tenbody table td.red {
-	color: #ee3523;
 }
 </style>
 <script type="text/javascript">
@@ -188,21 +183,21 @@ $(function(){
 		<div class="Areatitle">
 			<div class="title">
 				<span class="bigTitle">
-					<a href="s4.html">
+					<a href="<%=request.getContextPath()%>/finance.do?withdrawBtc">
 						BTC提现
 					</a>
 				</span>
 			</div>
 			<div class="notitle">
 				<span class="bigTitle">
-					<a href="s4-2.html">
+					<a href="<%=request.getContextPath()%>/finance.do?withdrawBtc2">
 						LTC提现
 					</a>
 				</span>
 			</div>
 			<div class="notitle">
 				<span class="bigTitle">
-					<a href="s4-3.html">
+					<a href="<%=request.getContextPath()%>/finance.do?withdrawBtc3">
 						SLM提现
 					</a>
 				</span>

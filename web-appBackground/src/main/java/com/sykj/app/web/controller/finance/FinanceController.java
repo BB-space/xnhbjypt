@@ -23,10 +23,16 @@ public class FinanceController extends BaseController{
 		return "/finance/index";
 	}
 	
-	//人民币充值
+	//人民币充值 银行汇款
 	@RequestMapping(params="rechargeCny")
 	public String rechargeCny() {
 		return "/finance/rechargeCny";
+	}
+	
+	//人民币充值 环迅支付
+	@RequestMapping(params="rechargeCny2")
+	public String rechargeCny2() {
+		return "/finance/rechargeCny2";
 	}
 	
 	//人民币提现
@@ -57,6 +63,18 @@ public class FinanceController extends BaseController{
 	@RequestMapping(params="withdrawBtc")
 	public String withdrawBtc() {
 		return "/finance/withdrawBtc";
+	}
+	
+	//网络流通币提现
+	@RequestMapping(params="withdrawBtc2")
+	public String withdrawBtc2() {
+		return "/finance/withdrawBtc2";
+	}
+	
+	//网络流通币提现
+	@RequestMapping(params="withdrawBtc3")
+	public String withdrawBtc3() {
+		return "/finance/withdrawBtc3";
 	}
 	
 	//账单明细
