@@ -66,7 +66,7 @@ $(function(){
 <body style="background:#f1f6f9;">
 <div class="main">
 		<div class="content_color">
-			<span class="blue_color">赛事新闻</span>
+			<span class="blue_color">官方公告</span>
 		</div>
 		<div class="main_content">
 			<div class="content_title">

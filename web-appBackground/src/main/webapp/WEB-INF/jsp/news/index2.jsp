@@ -12,11 +12,22 @@
 .newsad_left{
 	width:767px;
 	float:left;	
+
 }
 .newsad_right{
-	width:270px;
+	width:280px;
 	float:right;	
 	padding-top:84px;
+	white-space:nowrap;
+	 overflow:hidden; 
+	 text-overflow:ellipsis;
+}
+.newsad_pub li a{
+	display:inline-block;
+	max-width:160px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;	
 }
 </style>
 <script type="text/javascript">
@@ -92,9 +103,9 @@ $(function(){
 		
 		</div>	
 		
-		<div class="newsad_right rt">
+		<div class="newsad_right rt" >
 			
-			<div class="newsad_pub">
+			<div class="newsad_pub" >
 				
 				<div class="title2">
 					<span class="tit">官方公告</span>
