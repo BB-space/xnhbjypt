@@ -701,8 +701,7 @@ div.clear{
 }
 .newsad_pub li a{
 	display:inline-block;
-	max-width:190px;
-	_width:190px;
+	max-width:160px;
 	overflow:hidden;
 	text-overflow:ellipsis;
 	white-space:nowrap;	
