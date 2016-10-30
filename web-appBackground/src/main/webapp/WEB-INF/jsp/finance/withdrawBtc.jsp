@@ -52,7 +52,7 @@
 	top: -30px;
 	left: 0;
 }
-.title {
+.rightArea .Areatitle .title {
 	height: 45px;
 	line-height: 45px;
 	min-width: 150px;
@@ -90,6 +90,62 @@
 }
  .bigTitle {
 	display: block;
+}
+/******委托记录*********/
+.entrustTen {
+	
+}
+
+.gary {
+	color: #747373;
+}
+
+.entrustTen .Tentitle {
+	line-height: 35px;
+	font-weight: 700;
+	font-size: 14px;
+	padding: 10px 0;
+	background: #fff;
+}
+
+.entrustTen .Tentitle .title {
+	height: 35px;
+	color: #66b2e3;
+	background: #f5f5f5;
+	display: block;
+	cursor: pointer;
+}
+
+.entrustTen .Tenbody {
+	background: none repeat scroll 0 0 #FFFFFF;
+	display: none;
+	font-size: 12px;
+	padding-bottom: 45px;
+}
+
+.entrustTen .Tenbody table {
+	text-align: center;
+	border-left: none;
+}
+
+.entrustTen .Tenbody table th {
+	color: #747373;
+	line-height: 30px;
+	font-weight: normal;
+}
+
+.entrustTen .Tenbody table td {
+	color: #747373;
+	line-height: 30px;
+	border-top: 1px solid #e4e4e4;
+}
+
+.entrustTen .Tenbody table td.green {
+	color: #009900;
+}
+
+.entrustTen .Tenbody table td.red {
+	color: #ee3523;
 }
 </style>
 <script type="text/javascript">

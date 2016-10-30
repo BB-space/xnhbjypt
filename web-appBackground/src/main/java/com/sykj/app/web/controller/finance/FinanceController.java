@@ -35,10 +35,22 @@ public class FinanceController extends BaseController{
 		return "/finance/withdrawCny";
 	}
 	
-	//网络流通币充值
+	//网络流通币充值  BTC
 	@RequestMapping(params="rechargeBtc")
 	public String rechargeBtc() {
 		return "/finance/rechargeBtc";
+	}
+	
+	//网络流通币充值 LTC
+	@RequestMapping(params="rechargeBtc2")
+	public String rechargeBtc2() {
+		return "/finance/rechargeBtc2";
+	}
+	
+	//网络流通币充值 SLM
+	@RequestMapping(params="rechargeBtc3")
+	public String rechargeBtc3() {
+		return "/finance/rechargeBtc3";
 	}
 	
 	//网络流通币提现

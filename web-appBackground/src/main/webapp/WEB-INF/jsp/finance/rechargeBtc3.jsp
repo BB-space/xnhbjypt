@@ -185,7 +185,7 @@ $(function(){
 		<div class="Areatitle">
 			
 		
-			<div class="title">
+			<div class="notitle">
 				<span class="bigTitle">
 					<a href="<%=request.getContextPath()%>/finance.do?rechargeBtc">
 						BTC充值
@@ -205,70 +205,70 @@ $(function(){
 		
 	
 		
-			<div class="notitle">
+			<div class="title">
 				<span class="bigTitle">
 					<a href="<%=request.getContextPath()%>/finance.do?rechargeBtc3">
 						SLM充值
 					</a>
 				</span>
 			</div>
-				
-			
 		</div>
+		
 		<div class="coinBox lasttenorder3 clear Areacon">
-			<div class="coinBoxBody coinbox-left">
-				<div class="riskArea">
-					<span class="hinttext">
-						<span class="icon"></span>
-						<span class="define">重要提示：</span>本站<span style"color:red;"="">已经支持往同一地址多次充值</span>，我们将在收到<span class="red">3次确认</span>以后为您充值成功。
-					</span>
-				</div>
-				<div class="fincoinaddress-1">
-					请将BTC汇入如下地址：<span class="blue bold">15mdaKETDwUQDUtvDAfSTGJbzkrqB2DXNP</span>
-				</div>
-				<div class="rechargeCoin">
-					<div id="qrcode" class="rechargeQrcode"></div>
-				</div>
-			</div>
-			<div class="entrustTen">
-				<div class="Tentitle">
-					<div class="title">
-						<span class="left">
-							最近10次充值记录
+				<div class="coinBoxBody coinbox-left">
+					<div class="riskArea">
+						<span class="hinttext">
+							<span class="icon"></span>
+							<span class="define">重要提示：</span>本站<span style"color:red;"="">已经支持往同一地址多次充值</span>，我们将在收到<span class="red">3次确认</span>以后为您充值成功。
 						</span>
 					</div>
+					<div class="fincoinaddress-1">
+						请将SLM汇入如下地址：<span class="blue bold">SMvZc8qPT7SeJ963xUjrNyPyW3YuTcjtC7</span>
+					</div>
+					<div class="rechargeCoin">
+						<div id="qrcode" class="rechargeQrcode"></div>
+					</div>
 				</div>
-				<div id="Tenbody" class="Tenbody" style="display: block">
-					<table style="border:none;">
-						<tbody><tr>
-							<th width="530">
-								充值地址
-							</th>
-							<th width="150">
-								充值金额
-							</th>
-							<th width="190">
-								最后更新
-							</th>
-							<th width="150">
-								充值状态
-							</th>
-						</tr>
-						
-							<tr>
-								<td align="center" colspan="4">
-									<span class="no-data-tips">
-										您暂时没有充值数据
-									</span>
-								</td>
+				<div class="entrustTen">
+					<div class="Tentitle">
+						<div class="title">
+							<span class="left">
+								最近10次充值记录
+							</span>
+						</div>
+					</div>
+					<div id="Tenbody" class="Tenbody" style="display: block">
+						<table style="border:none;">
+							<tbody><tr>
+								<th width="530">
+									充值地址
+								</th>
+								<th width="150">
+									充值金额
+								</th>
+								<th width="190">
+									最后更新
+								</th>
+								<th width="150">
+									充值状态
+								</th>
 							</tr>
-						
-						
-						</tbody>
-					</table>
+							
+								<tr>
+									<td align="center" colspan="4">
+										<span class="no-data-tips">
+											您暂时没有充值数据
+										</span>
+									</td>
+								</tr>
+							
+							
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
-		</div>
+		
 	</div>
 	
 	<div class="clear"></div>
