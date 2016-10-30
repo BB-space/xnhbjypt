@@ -27,6 +27,70 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/resources/commonfiles/language_cn.js"></script>
 
 <jsp:include page="../test/head.jsp"></jsp:include>
+<style type="text/css">
+.rightArea {
+	width: 815px;
+	min-height: 560px;
+	float: left;
+	position: relative;
+	padding-left: 30px;
+	padding-bottom: 65px;
+}
+.Areacon {
+	font-size: 14px;
+	background: #fff;
+	border: 1px solid #e1e1e2;
+	padding: 50px 30px 0;
+	float: left;
+	width: 953px;
+	min-height: 542px;
+}
+.Areatitle {
+	line-height: 45px;
+	font-weight: 700;
+	font-size: 14px;
+	position: absolute;
+	padding-top: 10px;
+	padding-left: 30px;
+	top: -30px;
+	left: 0;
+}
+.title {
+	height: 45px;
+	line-height: 45px;
+	min-width: 150px;
+	color: #000;
+	background: #fff;
+	display: inline;
+	cursor: pointer;
+	font-size: 16px;
+	text-align: center;
+	border: 1px solid #e1e1e2;
+	border-style: solid solid none solid;
+	float: left;
+}
+.bigTopTab {
+	height: 40px;
+	background: #fff;
+}
+
+ .accountfilter {
+	line-height: 40px;
+	color: #747373;
+}
+.coinBoxBody {
+	background: none repeat scroll 0 0 #ffffff;
+	*padding: 4px 3px;
+	padding: 0 10px;
+}
+.riskArea {
+	background: none repeat scroll 0 0 #fae5e7;
+	padding: 10px 0;
+	vertical-align: middle;
+}
+
+
+</style>
 <script type="text/javascript">
 
 $(function(){
@@ -45,7 +109,7 @@ $(function(){
 <div class="ad_main">	
 	
 	<div class="ad_aside">
-		<a href=""<%=request.getContextPath()%>/finance.do?rechargeCny" ><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico1.png" />人民币充值<i></i></a>
+		<a href="<%=request.getContextPath()%>/finance.do?rechargeCny" ><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico1.png" />人民币充值<i></i></a>
 		<a href="#" class="hover"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico2.png" />人民币提现<i></i></a>
 		<a href="<%=request.getContextPath()%>/finance.do?rechargeBtc"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico3.png" />网络流通币充值<i></i></a>
 		<a href="<%=request.getContextPath()%>/finance.do?withdrawBtc"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico4.png" />网络流通币提现<i></i></a>

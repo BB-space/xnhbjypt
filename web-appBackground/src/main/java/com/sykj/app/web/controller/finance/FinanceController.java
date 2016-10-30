@@ -17,25 +17,9 @@ public class FinanceController extends BaseController{
 	@Resource
 	private FrontUserService frontUserService;
 	
-	@RequestMapping(params="index")
-	public String index(HttpSession session) {
-		FrontUserM frontUserM = (FrontUserM) session.getAttribute("frontUserM");
-		if(frontUserM != null){
-			//检查用户是否实名认证
-			boolean b = frontUserService.certification(frontUserM.getId());
-			
-			
-			if(b){  //已经实名认证
-				return "/finance/index";
-			}
-		}
-		return "/test/index";
-	}
-	
-	
 	//个人财务
 	@RequestMapping(params="index")
-	public String finance() {
+	public String index() {
 		return "/finance/index";
 	}
 	
