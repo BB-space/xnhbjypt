@@ -787,17 +787,19 @@ a {
 
 /*左侧菜单栏*/
 .marketArea {
-	margin: 65px auto 0;
 	width: 1200px;
+	margin: 0 auto;
 }
 
 .marketArea .rightArea {
-	width: 1015px;
+	width: 985px;
 	min-height: 560px;
 	float: left;
 	position: relative;
 	padding-top: 20px;
 	padding-bottom: 65px;
+	margin-top: 50px;
+	margin-bottom: 50px;
 }
 
 .marketArea .rightArea .Areatitle {
@@ -867,11 +869,14 @@ a {
 	width: 185px;
 	background: #fff;
 	float: left;
+	margin-right: 30px;
+	margin-top: 25px;
+	margin-bottom: 50px;
 }
 
 .marketArea .leftMenu .bor {
 	width: 185px;
-	height: auto;
+	background: #394991;
 	float: left;
 	border-bottom: #e6e6e6 solid 1px;
 }
@@ -903,35 +908,77 @@ a {
 
 .marketArea .leftMenu .bor ul {
 	float: left;
-	padding-left: 12px;
+	padding-left: 0px;
+	background: #394991;
+	padding-bottom: 233px
 }
 
 .marketArea .leftMenu .bor ul li {
 	float: left;
-	background-color: #fff;
 }
-
+.marketArea .leftMenu .bor ul li .arr{
+	display: block;
+    width: 8px;
+    height: 16px;
+    font-size: 1px;
+    background: url("../commonfiles/as_i.png") no-repeat left top;
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    margin-top: -8px;
+    display: none;
+}
 .marketArea .leftMenu .bor a {
-	width: 145px;
-	height: 46px;
-	line-height: 46px;
+	width: 125px;
+	height: 52px;
+	line-height: 52px;
 	float: left;
-	padding-left: 30px;
-	color: #777783;
+	padding-left: 60px;
+	color: #fff;
 	font-size: 15px;
 	cursor: pointer;
 	text-decoration: none;
+	border-bottom: 1px solid #4859a5;
+	position: relative;
 }
 
 .marketArea .leftMenu .bor a:hover {
-	color: #66b2e3;
 	text-decoration: none;
-	background-color: #f5f7fa;
+	background-color: #43bbfc;
+}
+.marketArea .leftMenu .bor a:hover .arr{
+	display: block;
 }
 
-.marketArea .leftMenu .bor .cur {
-	color: #66b2e3;
-	background-color: #f4f4f4;
+.marketArea .leftMenu .bor .cur1{
+	background: url(../commonfiles/finance_ico3.png) 22px 1px no-repeat;
+}
+.marketArea .leftMenu .bor .cur2{
+	background: url(../commonfiles/finance_ico2.png) 22px 1px no-repeat;
+}
+.marketArea .leftMenu .bor .cur3{
+	background: url(../commonfiles/finance_ico3.png) 22px 1px no-repeat;
+}
+.marketArea .leftMenu .bor .cur4{
+	background: url(../commonfiles/finance_ico2.png) 22px 1px no-repeat;
+}
+.marketArea .leftMenu .bor .cur5{
+	background: url(../commonfiles/finance_ico5.png) 22px 1px no-repeat;
+}
+.marketArea .leftMenu .bor .cur6{
+	background: url(../commonfiles/finance_ico6.png) 22px 1px no-repeat;
+}
+.marketArea .leftMenu .bor .cur7{
+	background: url(../commonfiles/finance_ico7.png) 22px 1px no-repeat;
+}
+.marketArea .leftMenu .bor .cur8{
+	background: url(../commonfiles/finance_ico8.png) 22px 1px no-repeat;
+}
+.marketArea .leftMenu .bor .cur9{
+	background: url(../commonfiles/finance_ico9.png) 22px 1px no-repeat;
+}
+.marketArea .leftMenu .bor .cur10{
+	background: url(../commonfiles/finance_ico10.png) 22px 1px no-repeat;
 }
 
 .marketArea .rightArea .onlineRecharge {

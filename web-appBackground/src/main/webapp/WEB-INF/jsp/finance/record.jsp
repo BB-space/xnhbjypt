@@ -21,6 +21,7 @@
 	min-height: 560px;
 	float: left;
 	position: relative;
+	margin-top: 43px;
 	padding-left: 30px;
 	padding-bottom: 65px;
 }
@@ -38,9 +39,8 @@
 	font-weight: 700;
 	font-size: 14px;
 	position: absolute;
-	padding-top: 10px;
 	padding-left: 30px;
-	top: -30px;
+	top: -43px;
 	left: 0;
 }
 .title {
@@ -95,7 +95,7 @@ $(function(){
 		<a href="#" class="hover"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico6.png" />账单明细<i></i></a>
 		<a href="<%=request.getContextPath()%>/finance.do?listentrust"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico7.png" />委托明细<i></i></a>
 		<a href="<%=request.getContextPath()%>/question.do?question"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico8.png" />发起问题<i></i></a>
-		<a href="<%=request.getContextPath()%>/question.do?questionCulmn"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico9.png" />问题列表<i></i></a>
+		<a href="<%=request.getContextPath()%>/question.do?questionColumn"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico9.png" />问题列表<i></i></a>
 		<a href="#" class="end"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico10.png" />消息中心<i></i></a>
 		
 	</div>

@@ -181,7 +181,7 @@ $(function(){
 		<input type="hidden" value="" id="withdrawAddr" name="withdrawAddr">
 		<input type="hidden" value="0.0" id="btcbalance" name="btcbalance">
 		<div class="Areatitle">
-			<div class="title">
+			<div class="notitle">
 				<span class="bigTitle">
 					<a href="<%=request.getContextPath()%>/finance.do?withdrawBtc">
 						BTC提现
@@ -195,7 +195,7 @@ $(function(){
 					</a>
 				</span>
 			</div>
-			<div class="notitle">
+			<div class="title">
 				<span class="bigTitle">
 					<a href="<%=request.getContextPath()%>/finance.do?withdrawBtc3">
 						SLM提现

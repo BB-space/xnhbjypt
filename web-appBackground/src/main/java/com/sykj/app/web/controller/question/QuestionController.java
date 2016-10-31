@@ -55,6 +55,19 @@ public class QuestionController extends BaseController{
 		return "/safe/safe_userSetting";
 	}
 	
+	@RequestMapping(params="questionColumn2")
+	public String questionColumn2(HttpSession session) {
+		FrontUserM frontUserM = (FrontUserM) session.getAttribute("frontUserM");
+		if(frontUserM != null){
+			//检查用户是否实名认证
+			boolean b = frontUserService.certification(frontUserM.getId());
+			if(b){  //已经实名认证
+				return "/question/questionColumn2";
+			}
+		}
+		return "/safe/safe_userSetting";
+	}
+	
 	/**
 	 * 提交问题
 	 * @param userQuestion

@@ -5,11 +5,6 @@
 <link href="<%=request.getContextPath()%>/resources/css/test/style1.css" rel="stylesheet" type="text/css" media="all"/>
 <link href="<%=request.getContextPath()%>/resources/css/test/style4.css" rel="stylesheet" type="text/css" media="all"/>
 <jsp:include page="../test/head.jsp"></jsp:include>
-<style type="text/css">
-
-
-</style>
-
 <script type="text/javascript">
 
 $(function(){

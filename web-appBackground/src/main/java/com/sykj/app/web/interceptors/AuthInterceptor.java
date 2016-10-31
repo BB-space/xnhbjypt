@@ -13,15 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.sykj.app.entity.system.Resources;
-import com.sykj.app.entity.user.User;
-import com.sykj.app.model.SessionInfo;
+import com.sykj.app.model.FrontUserM;
 import com.sykj.app.model.UserM;
 import com.sykj.app.service.system.MenuService;
 import com.sykj.app.service.system.ResourcesService;
+import com.sykj.app.service.user.FrontUserService;
 import com.sykj.app.service.user.UserService;
 import com.sykj.app.util.RequestUtil;
-import com.sykj.app.util.ResourceUtil;
 
 public class AuthInterceptor extends HandlerInterceptorAdapter {
 	
@@ -31,6 +29,9 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 	private UserService userService;
 	@Resource
 	private MenuService menuService;
+	@Resource
+	private FrontUserService frontUserService;
+	
 	/**
 	 * 完成页面的render后调用
 	 */
@@ -49,7 +50,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 	 * 在调用controller具体方法前拦截
 	 */
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
-		String requestPath = RequestUtil.getRequestPath(request);// 用户访问的资源地址
+		String requestPath = RequestUtil.getRequestPath(request);// 用户访问的资源地址	
 //		System.out.println("&&^**((&^"+requestPath);
 //		Resources resources =resourcesService.getResourcesBySrc(requestPath);
 //		if(resources==null){
@@ -128,12 +129,18 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 //		if(requestPath.equals("/wxRegistered.do?registered")){
 //			return true;
 //		}
-//		UserM userM = (UserM) request.getSession().getAttribute("userM");
-//		if(userM==null){
-//			System.out.println("session失效处理");
-//			doSessionOut(request,response);//处理用户长时间未操作
-//			return false;
-//		}
+
+
+		if(requestPath.equals("/code.do?code") || requestPath.substring(0, 5).equals("/test")
+			|| requestPath.substring(0, 5).equals("/news") || requestPath.substring(0, 6).equals("/trade")){
+			return true;
+		}
+		FrontUserM frontUserM = (FrontUserM) request.getSession().getAttribute("frontUserM");
+		if(frontUserM == null){
+			System.out.println("session失效处理");
+			doSessionOut(request,response);//处理用户长时间未操作
+			return false;
+		}
 		return true;
 	}
 	
@@ -150,22 +157,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		StringBuilder builder = new StringBuilder(); 
         builder.append("<script type=\"text/javascript\" charset=\"UTF-8\">");  
 		String path =request.getContextPath();
-		Cookie[] cookies = request.getCookies();//获得cookies
-		String userName = RequestUtil.getCookie(cookies,"userName");//获得cookies里面的用户名
-		String userPassword = RequestUtil.getCookie(cookies,"userPassword");//获得cookies里面的密码
-		UserM userM =userService.login(userName,userPassword);//校验用户名和密码
-		if (userM != null) {
-			userM.setUserPassword(userPassword);
-			RequestUtil.addUserCookie(response, userM);//添加用户到cookie
-			HashSet<String> set = menuService.roleMenuIdSet(userM);
-			userM.setRoleMenuIdSet(set);
-			request.getSession().setAttribute("userM", userM);
-			//builder.append("alert(\"进入session失效处理方法！\");"); 
-			path+="/index.do";
-		}else{
-			builder.append("alert(\"您已经太久没登陆了，请重新登录！\");");  
-			path+="/index.jsp";
-		}
+		builder.append("alert(\"您已经太久没登陆了，请重新登录！\");");
 	    response.setContentType("text/html; charset=utf-8"); 
         PrintWriter out = response.getWriter();  
         builder.append("window.top.location.href=\"");
@@ -174,5 +166,33 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
         builder.append("</script>");  
         out.print(builder.toString());  
         out.close();
+		
+//		StringBuilder builder = new StringBuilder(); 
+//        builder.append("<script type=\"text/javascript\" charset=\"UTF-8\">");  
+//		String path =request.getContextPath();
+//		Cookie[] cookies = request.getCookies();//获得cookies
+//		String userName = RequestUtil.getCookie(cookies,"userName");//获得cookies里面的用户名
+//		String userPassword = RequestUtil.getCookie(cookies,"userPassword");//获得cookies里面的密码
+//		UserM userM =userService.login(userName,userPassword);//校验用户名和密码
+//		if (userM != null) {
+//			userM.setUserPassword(userPassword);
+//			RequestUtil.addUserCookie(response, userM);//添加用户到cookie
+//			HashSet<String> set = menuService.roleMenuIdSet(userM);
+//			userM.setRoleMenuIdSet(set);
+//			request.getSession().setAttribute("userM", userM);
+//			//builder.append("alert(\"进入session失效处理方法！\");"); 
+//			path+="/index.do";
+//		}else{
+//			builder.append("alert(\"您已经太久没登陆了，请重新登录！\");");  
+//			path+="/index.jsp";
+//		}
+//	    response.setContentType("text/html; charset=utf-8"); 
+//        PrintWriter out = response.getWriter();  
+//        builder.append("window.top.location.href=\"");
+//        builder.append(path);
+//        builder.append("\"");
+//        builder.append("</script>");  
+//        out.print(builder.toString());  
+//        out.close();
 	}
 }

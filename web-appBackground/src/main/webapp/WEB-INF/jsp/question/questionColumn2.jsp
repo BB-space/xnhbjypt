@@ -167,14 +167,14 @@ function submitQuestionForm(){
 	
 	<div class="rightArea">
 			<div class="Areatitle">
-				<div class="title">
+				<div class="notitle">
 					<span class="bigTitle">
 						<a href="<%=request.getContextPath()%>/question.do?questionColumn">
 							未解决
 						</a>
 					</span>
 				</div>
-				<div class="notitle">
+				<div class="title">
 					<span class="bigTitle">
 						<a href="<%=request.getContextPath()%>/question.do?questionColumn2">
 							已解决
@@ -211,37 +211,12 @@ function submitQuestionForm(){
 							</tr>
 							
 							<tr>
-								<td class="gray" width="80">29</td>
-								<td class="gray" width="110">
-									提现问题
-								</td>
-								<td class="gray" width="150">
-									231
-								</td>
-								<td class="gray" width="150">
-									
-								</td>
-								<td class="gray" width="150">
-									2016-10-22 11:50:38
-								</td>
-								<td class="gray" width="80">
-									未解决
-								</td>
-								<td class="gray" width="60">
-									<a onclick="javascript:cancelQuestion(29);" href="javascript:void(0);">
-										删除
-									</a>
-								</td>
-							</tr>
-							
-							
-							<!-- <tr>
 								<td colspan="7">
 									<span class="no-data-tips">
 										您暂时没有提问记录
 									</span>
 								</td>
-							</tr> -->
+							</tr>
 							
 							</tbody>
 						</table>

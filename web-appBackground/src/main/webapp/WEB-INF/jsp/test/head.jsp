@@ -274,11 +274,10 @@
  						$('#li_UID').html('UID　 ：'+d.obj.uid);
  						$('#li_totalMoney').html('总资产：<span class="red">￥'+d.obj.totalMoney+'</span>');
  						
- 						$.session.set("login", "true");
  						//如果是点击财务中心，安全中心的，登陆后跳转
  						if($.session.get("location")){
  							window.location.href = $.session.get("location");
- 							$.session.remove("location");
+							$.session.remove("location");
  						}
  					} else {
  						alert("用户名或密码错误，请重新输入！");
@@ -343,7 +342,6 @@
 					$('#li_UID').html('UID　 ：'+d.obj.uid);
 					$('#li_totalMoney').html('总资产：<span class="red">￥'+d.obj.totalMoney+'</span>');
 					
-					$.session.set("login", "true");
 				} else {
 					if(d.msg = '1'){	//验证码不正确
 						$('#err_reg_mobileCheckCode').html("验证码不正确！").addClass("Validform_checktip Validform_wrong");
@@ -409,13 +407,15 @@
 		}else if(part == 2){
 			location = "${pageContext.request.contextPath}/safe.do?safeSetting";
 		}
-		if($.session.get("login") == "true"){
-			window.location.href = location;
-		}else {
-			//弹出登陆界面
-			 $.session.set("location", location);
+		
+		if($('.login_after').is(':hidden')){	
+			//未登录
+			$.session.set("location", location);
 			$('#login_a').click();
+		}else {
+			window.location.href = location;
 		}
+		
 	}
 	
 	function logOut(){

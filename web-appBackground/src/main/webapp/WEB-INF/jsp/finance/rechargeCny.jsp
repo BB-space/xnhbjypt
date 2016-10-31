@@ -4,11 +4,11 @@
 <html style="background:#f1f6f9;">
 <head>
 <link href="<%=request.getContextPath()%>/resources/css/test/style1.css" rel="stylesheet" type="text/css" media="all"/>
+
 <link rel="icon" href="#" type="image/x-icon">
 <link rel="shortcut icon" href="#" type="image/x-icon">
 <link href="<%=request.getContextPath()%>/resources/commonfiles/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" type="text/css" media="screen, projection">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/common/common.css" type="text/css">
-<link media="screen, projection" type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/common/financial.css">
 <script type="text/javascript" src="<%=request.getContextPath()%>/resources/commonfiles/jquery-1.8.2.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/resources/commonfiles/script.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/resources/commonfiles/jquery-ui-1.10.4.custom.min.js"></script>
@@ -22,13 +22,16 @@
 <script src="<%=request.getContextPath()%>/resources/commonfiles/jquery.flot.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/resources/commonfiles/jquery.placeholder-1.0.0.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/resources/commonfiles/language_cn.js"></script>
+<link href="<%=request.getContextPath()%>/resources/css/test/style1.css" rel="stylesheet" type="text/css" media="all"/>
 <jsp:include page="../test/head.jsp"></jsp:include>
+<link media="screen, projection" type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/common/financial.css">
 <style type="text/css">
 .rightArea {
 	width: 815px;
 	min-height: 560px;
 	float: left;
 	position: relative;
+	margin-top: 43px;
 	padding-left: 30px;
 	padding-bottom: 65px;
 }
@@ -46,9 +49,8 @@
 	font-weight: 700;
 	font-size: 14px;
 	position: absolute;
-	padding-top: 10px;
 	padding-left: 30px;
-	top: -30px;
+	top: -43px;
 	left: 0;
 }
 .rightArea .Areatitle .title {
@@ -95,6 +97,17 @@
 	width: 485px;
 	float: left;
 }
+.rightArea .clear {
+	zoom: 1;
+	clear: both;
+}
+p {
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
 </style>
 <script type="text/javascript">
 $(function(){
@@ -121,7 +134,7 @@ $(function(){
 		<a href="<%=request.getContextPath()%>/finance.do?record"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico6.png" />账单明细<i></i></a>
 		<a href="<%=request.getContextPath()%>/finance.do?listentrust"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico7.png" />委托明细<i></i></a>
 		<a href="<%=request.getContextPath()%>/question.do?question"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico8.png" />发起问题<i></i></a>
-		<a href="<%=request.getContextPath()%>/question.do?questionCulmn"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico9.png" />问题列表<i></i></a>
+		<a href="<%=request.getContextPath()%>/question.do?questionColumn"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico9.png" />问题列表<i></i></a>
 		<a href="#" class="end"><img src="<%=request.getContextPath()%>/resources/img/test/finance_ico10.png" />消息中心<i></i></a>
 	</div>
 	
