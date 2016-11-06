@@ -16,6 +16,11 @@ public interface UserQuestionDao extends IBaseDao<UserQuestion>{
 	 * 添加提问记录
 	 */
 	public void addUserQuestion(UserQuestion question);
+	
+	/**
+	 * 删除提问记录
+	 */
+	public void cancelQuestion(String id);
 	/**
 	 * 获得所有提问记录（分页）
 	 */

@@ -93,6 +93,7 @@
 		}
 	}); 
  	
+ 	//手机验证码
 	$("#reg_mobileCheckCode").blur(function() {
 		var mobileCheckCode = trim($("#reg_mobileCheckCode").val());
 		if(mobileCheckCode == ''){
@@ -102,9 +103,27 @@
 			$('#err_reg_mobileCheckCode').html("请输入6位验证码！").addClass("Validform_checktip Validform_wrong");
 			mark.regMobileCheckCode=false;
 		}else{
-			$('#err_reg_mobileCheckCode').html("通过信息验证！").removeClass("Validform_checktip Validform_wrong")
-				.addClass("Validform_checktip Validform_right");
-			mark.regMobileCheckCode=true;
+			
+			var dataPara = {mobileCheckCode:mobileCheckCode};
+			
+			$.ajax({
+				url : '${pageContext.request.contextPath}/test.do?checkMobileCode',
+				type : 'post',
+				data : dataPara,
+				success : function(data) {
+					var d = $.parseJSON(data);
+					if (d.success == false) {
+						$('#err_reg_mobileCheckCode').html("手机验证码错误！").addClass("Validform_checktip Validform_wrong");
+						mark.regCheckCodeMobile=false;
+					}else {
+						$('#err_reg_mobileCheckCode').html("通过信息验证！").removeClass("Validform_checktip Validform_wrong")
+						.addClass("Validform_checktip Validform_right");
+						mark.regMobileCheckCode=true;
+					}
+				}
+			});
+			
+			
 		}
 	});
 	
@@ -418,11 +437,67 @@
 		
 	}
 	
+	//推出登陆
 	function logOut(){
-		 $.session.remove("login");
-		 $.session.remove("location");
 		 window.location.href = "<%=request.getContextPath()%>/test.do?logout";
 	}
+	
+	//发送验证码
+	function sendMobileCheckCode(){
+		
+		
+		//发送验证码的效果
+		var getTime = 0;
+//		var _this = this;
+		var _this =  $("#send_RegMobileCode");
+		var item =  $("#send_RegMobileCode");
+		if($(item).hasClass("yz_unable")){
+			return;	
+		}
+		
+		$("#reg_mobile").blur();
+		if(!(mark.regMobile)){
+			return;
+		}
+		//发送验证码
+		var mobile = trim($("#reg_mobile").val());
+		var dataPara = {mobile:mobile};
+		$.ajax({
+			url : '${pageContext.request.contextPath}/test.do?sendCheckCode',
+			type : 'post',
+			data : dataPara,
+			success : function(data) {
+				var d = $.parseJSON(data);
+			}
+		});
+		
+		$(item).addClass("yz_unable");
+		var numAll = 60;
+		$(item).html(numAll+"秒后重发");		
+		getTime = setInterval(function(){
+			numAll--;
+			if(numAll <= 0){
+				//重置session手机验证码
+				$.ajax({
+					url : '${pageContext.request.contextPath}/test.do?resetCheckCode',
+					type : 'post',
+					//data : dataPara,
+					success : function(data) {
+					}
+				});
+				
+				$(_this).removeClass("yz_unable");	
+				$(_this).html("发送验证码");
+				clearInterval(getTime);
+				return;
+			}
+			$(_this).html(numAll+"秒后重发");	
+		},1000);
+		
+		
+		
+	}
+	
 	
 	function changeImg(type) {
 		var imgSrc;
@@ -579,7 +654,7 @@
 				<div class="line25"></div>
 				<div class="in">
 					<div class="in">
-						<a href="javascript:;" class="get_yz">发送验证码</a>
+						<a href="javascript:sendMobileCheckCode();" class="get_yz" id="send_RegMobileCode">发送验证码</a>
 						<input id="reg_mobileCheckCode" name="mobileCheckCode" type="text" class="text" placeholder="短信验证码" />	
 						<span id='err_reg_mobileCheckCode'></span>
 					</div>

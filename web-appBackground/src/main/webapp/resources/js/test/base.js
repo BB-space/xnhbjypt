@@ -279,34 +279,34 @@ $(function(){
 	});	
 	
 	//发送验证码的效果
-	
-	var getTime = 0;
-	$(".get_yz").click(function(){
-		var _this = this;
-		if($(this).hasClass("yz_unable")){
-			return;	
-		}	
-		
-		$(this).addClass("yz_unable");
-		
-		var numAll = 60;
-		
-		$(this).html(numAll+"秒后重发");		
-		
-		getTime = setInterval(function(){
-			numAll--;
-			
-			if(numAll <= 0){
-				$(_this).removeClass("yz_unable");	
-				$(_this).html("发送验证码");
-				clearInterval(getTime);
-				return;
-			}
-			
-			$(_this).html(numAll+"秒后重发");	
-		},1000);
-		
-	});
+//	var getTime = 0;
+//	$(".get_yz").click(function(){
+//		
+//		var _this = this;
+//		if($(this).hasClass("yz_unable")){
+//			return;	
+//		}	
+//		
+//		$(this).addClass("yz_unable");
+//		
+//		var numAll = 60;
+//		
+//		$(this).html(numAll+"秒后重发");		
+//		
+//		getTime = setInterval(function(){
+//			numAll--;
+//			
+//			if(numAll <= 0){
+//				$(_this).removeClass("yz_unable");	
+//				$(_this).html("发送验证码");
+//				clearInterval(getTime);
+//				return;
+//			}
+//			
+//			$(_this).html(numAll+"秒后重发");	
+//		},1000);
+//		
+//	});
 	
 	//ad_aside 的hover效果
 	var _adindex = $(".ad_aside .hover").index();

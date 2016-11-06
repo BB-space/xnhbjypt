@@ -10,12 +10,12 @@
 			<column name="USERQUESTION_ID" length="36" />
 			<generator class="assigned" />
 		</id>
-		<property name="createDateTime" type="java.util.Date">
+		<property name="createDateTime" type="java.lang.String">
 			<column name="CREATEDATETIME" length="7">
 				<comment>创建时间</comment>
 			</column>
 		</property>
-		<property name="updateDateTime" type="java.util.Date">
+		<property name="updateDateTime" type="java.lang.String">
 			<column name="updateDateTime" length="7">
 				<comment>创建时间</comment>
 			</column>
@@ -70,7 +70,7 @@
 				<comment>问题编号</comment>
 			</column>
 		</property>
-		<property name="replyDateTime" type="java.util.Date">
+		<property name="replyDateTime" type="java.lang.String">
 			<column name="replyDateTime" length="7">
 				<comment>回复时间</comment>
 			</column>

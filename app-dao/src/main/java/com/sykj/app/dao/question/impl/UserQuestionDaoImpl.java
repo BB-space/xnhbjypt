@@ -24,11 +24,14 @@ public class UserQuestionDaoImpl extends BaseDao<UserQuestion> implements UserQu
 		
 		this.add(question);
 	}
-
+	
 	@Override
 	public Pager<UserQuestion> findUserQuestion(SystemContext syct, UserQuestionM question) {
 		StringBuffer hql = new StringBuffer("from UserQuestion t where 1=1");
 		if(question !=null){// 添加查询条件
+			if (question.getLoginName() != null && !question.getLoginName().trim().equals("")) {
+				hql.append(" and t.loginName = '").append(question.getLoginName().trim()).append("' ");
+			}
 			if (question.getStatus() != null && !question.getStatus().trim().equals("")) {
 				hql.append(" and t.status = '").append(question.getStatus().trim()).append("' ");
 			}
@@ -37,7 +40,9 @@ public class UserQuestionDaoImpl extends BaseDao<UserQuestion> implements UserQu
 		return this.find(hql.toString(),syct);
 	}
 
-	
-
+	@Override
+	public void cancelQuestion(String id) {
+		this.updateByHql("delete from UserQuestion t where t.questionId = '" + id +"'");
+	}
 }
 	

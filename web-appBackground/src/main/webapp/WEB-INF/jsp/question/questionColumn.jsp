@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html style="background:#f1f6f9;">
 <head>
 
@@ -122,7 +123,6 @@ $(function(){
 
 
 
-
 //提交问题
 function submitQuestionForm(){
 	var old_nickName = '${sessionScope.frontUserM.nickName}';
@@ -145,6 +145,21 @@ function submitQuestionForm(){
 	});
 }
 
+//删除问题
+function cancelQuestion(item){
+	var dataPara = {questionId:item};
+	$.ajax({
+		url : '${pageContext.request.contextPath}/question.do?cancelQuestion',
+		type : 'post',
+		data : dataPara,
+		success : function(data) {
+			var d = $.parseJSON(data);
+			if (d.success == true) {
+				window.location.href = "<%=request.getContextPath()%>/question.do?questionColumn";
+			} 
+		}
+	});
+}
 
 </script>
 </head>
@@ -210,30 +225,22 @@ function submitQuestionForm(){
 								</th>
 							</tr>
 							
+							<c:forEach items="${questionList}" var="item" varStatus="status">
 							<tr>
-								<td class="gray" width="80">29</td>
-								<td class="gray" width="110">
-									提现问题
-								</td>
-								<td class="gray" width="150">
-									231
-								</td>
-								<td class="gray" width="150">
-									
-								</td>
-								<td class="gray" width="150">
-									2016-10-22 11:50:38
-								</td>
-								<td class="gray" width="80">
-									未解决
-								</td>
+								<td class="gray" style="display:none">${item.questionId}</td>
+								<td class="gray" width="80">${item.questionNumber}</td>
+								<td class="gray" width="110">${item.questionType}</td>
+								<td class="gray" width="150">${item.questionCentent}</td>
+								<td class="gray" width="150">${item.replyCentent}</td>
+								<td class="gray" width="150">${item.createDateTime}</td>
+								<td class="gray" width="80">${item.status}</td>
 								<td class="gray" width="60">
-									<a onclick="javascript:cancelQuestion(29);" href="javascript:void(0);">
+									<a onclick="javascript:cancelQuestion('${item.questionId}');" href="javascript:void(0);">
 										删除
 									</a>
 								</td>
 							</tr>
-							
+							</c:forEach>
 							
 							<!-- <tr>
 								<td colspan="7">

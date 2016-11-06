@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html style="background:#f1f6f9;">
 <head>
 
@@ -210,13 +211,29 @@ function submitQuestionForm(){
 								</th>
 							</tr>
 							
+							<c:forEach items="${questionList}" var="item" varStatus="status">
 							<tr>
+								<td class="gray" width="80">${item.questionNumber}</td>
+								<td class="gray" width="110">${item.questionType}</td>
+								<td class="gray" width="150">${item.questionCentent}</td>
+								<td class="gray" width="150">${item.replyCentent}</td>
+								<td class="gray" width="150">${item.createDateTime}</td>
+								<td class="gray" width="80">${item.status}</td>
+								<td class="gray" width="60">
+									<a onclick="javascript:cancelQuestion(29);" href="javascript:void(0);">
+										删除
+									</a>
+								</td>
+							</tr>
+							</c:forEach>
+							
+							<!-- <tr>
 								<td colspan="7">
 									<span class="no-data-tips">
 										您暂时没有提问记录
 									</span>
 								</td>
-							</tr>
+							</tr> -->
 							
 							</tbody>
 						</table>

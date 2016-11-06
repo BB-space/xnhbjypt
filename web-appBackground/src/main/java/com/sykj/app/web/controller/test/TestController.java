@@ -1,5 +1,8 @@
 package com.sykj.app.web.controller.test;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sykj.app.model.FrontUserM;
 import com.sykj.app.model.Json;
 import com.sykj.app.service.user.FrontUserService;
+import com.sykj.app.util.SMSUtil;
 import com.sykj.app.web.controller.BaseController;
 
 @Controller
@@ -77,6 +81,64 @@ public class TestController extends BaseController{
 	}
 
 	/**
+	 * 给手机发送验证码
+	 * @param mobile
+	 * @param session
+	 * @param req
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(params="sendCheckCode")
+	@ResponseBody
+	public Json sendCheckCode(String mobile, HttpSession session,
+			HttpServletRequest req,HttpServletResponse response) throws Exception {
+		Json j = new Json();
+		
+//		String mobileCheckCode = (int)((Math.random()*9+1)*100000) + "";
+		String mobileCheckCode = "888888";
+		String content = "【数字资产交易平台】您的验证码是："+mobileCheckCode+"。请不要把验证码泄露给他人，如非本人操作，请勿理会！";
+//		SMSUtil.sendTextSms(mobile, content);
+		session.setAttribute("mobileCheckCode", mobileCheckCode);
+		
+		return j;
+	}
+	
+	@RequestMapping(params="resetCheckCode")
+	@ResponseBody
+	public Json resetCheckCode(HttpSession session,
+			HttpServletRequest req,HttpServletResponse response) throws Exception {
+		Json j = new Json();
+		session.setAttribute("mobileCheckCode", null);
+		return j;
+	}
+	
+	/**
+	 * 校验手机验证码是否正确
+	 * @param mobileCheckCode
+	 * @param session
+	 * @param req
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(params="checkMobileCode")
+	@ResponseBody
+	public Json checkMobileCode(String mobileCheckCode, HttpSession session,
+			HttpServletRequest req,HttpServletResponse response) throws Exception {
+		Json j = new Json();
+		
+		String checkCode = (String) session.getAttribute("mobileCheckCode");
+		if(checkCode != null && checkCode.equals(mobileCheckCode)){
+			j.setSuccess(true);
+		}else {
+			j.setSuccess(false);
+		}
+		
+		return j;
+	}
+	
+	/**
 	 * 检查手机/邮箱是否已经存在
 	 * @param userName
 	 * @param session
@@ -121,18 +183,33 @@ public class TestController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(params="validate")
-	public String validate(String uid, String uuid, HttpSession session) {
+	public void validate(String uid, String uuid, HttpSession session,
+			HttpServletRequest request,HttpServletResponse response)  throws IOException{
+		String tip = "";
 		int result = frontUserService.validate(uid, uuid);
 		if(result == 0){
-			//激活成功
-			FrontUserM frontUserM = (FrontUserM) session.getAttribute("frontUserM");
-			if(frontUserM != null){
-				frontUserM.setEmailStatus("1");
-				session.setAttribute("frontUserM", frontUserM);
-			}
-			
+			tip = "尊敬的用户，您的账号已激活，请点击登录！";
+		}else if(result == -1){
+			tip = "该邮箱未注册（邮箱地址不存在）";
+		}else if(result == -2){
+			tip = "该账号已激活";
+		}else if(result == -3){
+			tip = "激活码不正确";
 		}
 		
-		return "/test/index";
+		StringBuilder builder = new StringBuilder(); 
+        builder.append("<script type=\"text/javascript\" charset=\"UTF-8\">");  
+		String path =request.getContextPath();
+	    response.setContentType("text/html; charset=utf-8"); 
+	    builder.append("alert(\""+tip+"\");");
+        PrintWriter out = response.getWriter();  
+        builder.append("window.top.location.href=\"");
+        builder.append(path);
+        builder.append("\";");
+        builder.append("</script>");  
+        out.print(builder.toString());  
+        out.close();
+		
+//		return "/test/index";
 	}
 }

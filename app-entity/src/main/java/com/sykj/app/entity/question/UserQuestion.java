@@ -1,6 +1,5 @@
 package com.sykj.app.entity.question;
 
-import java.util.Date;
 /**
  * 问题表
  * @author lisq
@@ -9,8 +8,8 @@ import java.util.Date;
 public class UserQuestion  implements java.io.Serializable {
 
 	private String questionId;//
-	private Date createDateTime;//创建时间
-	private Date updateDateTime;//修改时间
+	private String createDateTime;//创建时间
+	private String updateDateTime;//修改时间
 	private String createUser;//创建人
 	private String updateUser;//修改人
 	private String questionUser;//提问人
@@ -28,7 +27,7 @@ public class UserQuestion  implements java.io.Serializable {
 		super();
 	}
 	
-	public UserQuestion(String questionId, Date createDateTime, Date updateDateTime, String createUser,
+	public UserQuestion(String questionId, String createDateTime, String updateDateTime, String createUser,
 			String updateUser, String questionUser, String loginName, String status, String questionType,
 			String replyCentent, String questionCentent, String replyPeople, String questionNumber,
 			String replyDateTime, String mobile) {
@@ -58,19 +57,19 @@ public class UserQuestion  implements java.io.Serializable {
 		this.questionId = questionId;
 	}
 
-	public Date getCreateDateTime() {
+	public String getCreateDateTime() {
 		return createDateTime;
 	}
 
-	public void setCreateDateTime(Date createDateTime) {
+	public void setCreateDateTime(String createDateTime) {
 		this.createDateTime = createDateTime;
 	}
 
-	public Date getUpdateDateTime() {
+	public String getUpdateDateTime() {
 		return updateDateTime;
 	}
 
-	public void setUpdateDateTime(Date updateDateTime) {
+	public void setUpdateDateTime(String updateDateTime) {
 		this.updateDateTime = updateDateTime;
 	}
 

@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sykj.app.entity.question.UserQuestion;
-import com.sykj.app.model.EasyuiDataGrid;
-import com.sykj.app.model.EasyuiDataGridJson;
 import com.sykj.app.model.FrontUserM;
 import com.sykj.app.model.Json;
+import com.sykj.app.model.Pager;
 import com.sykj.app.model.SystemContext;
 import com.sykj.app.model.question.UserQuestionM;
 import com.sykj.app.service.question.UserQuestionService;
@@ -43,12 +42,41 @@ public class QuestionController extends BaseController{
 	}
 	
 	@RequestMapping(params="questionColumn")
-	public String questionColumn(HttpSession session) {
+	public String questionColumn(UserQuestionM userQuestion, HttpSession session,
+			HttpServletRequest request, HttpServletResponse response) {
 		FrontUserM frontUserM = (FrontUserM) session.getAttribute("frontUserM");
 		if(frontUserM != null){
 			//检查用户是否实名认证
 			boolean b = frontUserService.certification(frontUserM.getId());
 			if(b){  //已经实名认证
+				String page = request.getParameter("page");
+				if (page == null) {
+					page = "1";
+				}
+				SystemContext syct=new SystemContext();
+				syct.setPageNum(Integer.parseInt(page));
+				long pageTimes;// 页数
+				int pageSize = 10;// 每页显示记录数
+				syct.setNumPerPage(pageSize);
+				userQuestion.setLoginName(frontUserM.getUserName());
+				userQuestion.setStatus("未解决");
+				Pager<UserQuestion> pager = userQuestionService.findUserQuestion(syct, userQuestion);
+				long totalNum = pager.getTotalCount();// 总记录数
+				if (totalNum % pageSize == 0) {
+					pageTimes = totalNum / pageSize;
+				} else {
+					pageTimes = totalNum / pageSize + 1;
+				}
+
+				try {
+					request.setAttribute("questionList", pager.getDatas());
+					request.setAttribute("totalNum", totalNum);
+					request.setAttribute("currentPage", Integer.parseInt(page));
+					request.setAttribute("pageTimes", pageTimes);
+				} catch (Exception e) {
+
+				}
+				
 				return "/question/questionColumn";
 			}
 		}
@@ -56,12 +84,40 @@ public class QuestionController extends BaseController{
 	}
 	
 	@RequestMapping(params="questionColumn2")
-	public String questionColumn2(HttpSession session) {
+	public String questionColumn2(UserQuestionM userQuestion, HttpSession session,
+			HttpServletRequest request, HttpServletResponse response) {
 		FrontUserM frontUserM = (FrontUserM) session.getAttribute("frontUserM");
 		if(frontUserM != null){
 			//检查用户是否实名认证
 			boolean b = frontUserService.certification(frontUserM.getId());
 			if(b){  //已经实名认证
+				String page = request.getParameter("page");
+				if (page == null) {
+					page = "1";
+				}
+				SystemContext syct=new SystemContext();
+				syct.setPageNum(Integer.parseInt(page));
+				long pageTimes;// 页数
+				int pageSize = 10;// 每页显示记录数
+				syct.setNumPerPage(pageSize);
+				userQuestion.setLoginName(frontUserM.getUserName());
+				userQuestion.setStatus("解决");
+				Pager<UserQuestion> pager = userQuestionService.findUserQuestion(syct, userQuestion);
+				long totalNum = pager.getTotalCount();// 总记录数
+				if (totalNum % pageSize == 0) {
+					pageTimes = totalNum / pageSize;
+				} else {
+					pageTimes = totalNum / pageSize + 1;
+				}
+
+				try {
+					request.setAttribute("questionList", pager.getDatas());
+					request.setAttribute("totalNum", totalNum);
+					request.setAttribute("currentPage", Integer.parseInt(page));
+					request.setAttribute("pageTimes", pageTimes);
+				} catch (Exception e) {
+
+				}
 				return "/question/questionColumn2";
 			}
 		}
@@ -91,22 +147,14 @@ public class QuestionController extends BaseController{
 		return j;
 	}
 	
-	/**
-	 * 获取问题列表
-	 * @param dg
-	 * @param searchParam
-	 * @return
-	 */
-	@SuppressWarnings("static-access")
-	@RequestMapping(params="questionParamDatagrid")
+	@RequestMapping(params="cancelQuestion")
 	@ResponseBody
-	public EasyuiDataGridJson questionDatagrid(EasyuiDataGrid dg, UserQuestionM userQuestion) {
-		SystemContext syct=new SystemContext();
-		syct.setNumPerPage(dg.getRows());
-		syct.setOrder(dg.getOrder());
-		syct.setPageNum(dg.getPage());
-		syct.setSort(dg.getSort());
-		return userQuestionService.findUserQuestion(syct, userQuestion);
+	public Json cancelQuestion(UserQuestion userQuestion, HttpSession session,
+			HttpServletRequest req,HttpServletResponse response) {
+		Json j = new Json();
+		userQuestionService.cancelQuestion(userQuestion);
+		j.setSuccess(true);
+		return j;
 	}
 	
 }

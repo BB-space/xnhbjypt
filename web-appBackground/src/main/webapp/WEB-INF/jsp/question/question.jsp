@@ -19,24 +19,30 @@ $(function(){
 
 //提交问题
 function submitQuestion(){
+	$(".questionButtonblue").removeAttr('onclick');
+	
 	var questionType = $('#questionType').val();
 	var questionCentent = $('#questionCentent').val();
 	var questionUser = trim($('#questionUser').val());
 	var question_mobile = $('#question_mobile').val();
 	if(questionType == "-1"){
 		$('#errorMsg').html('请选择问题类型。');
+		$(".questionButtonblue").attr('onclick', 'submitQuestion()');
 		return;
 	}
 	if(questionCentent == ""){
 		$('#errorMsg').html('请输入问题描述。 ');
+		$(".questionButtonblue").attr('onclick', 'submitQuestion()');
 		return;
 	}
 	if(questionUser == ""){
 		$('#errorMsg').html('请输入姓名。  ');
+		$(".questionButtonblue").attr('onclick', 'submitQuestion()');
 		return;
 	}
 	if(question_mobile == ""){
 		$('#errorMsg').html('请输入正确的电话号码。  ');
+		$(".questionButtonblue").attr('onclick', 'submitQuestion()');
 		return;
 	}
 	
