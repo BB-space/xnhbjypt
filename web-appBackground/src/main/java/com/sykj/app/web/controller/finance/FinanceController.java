@@ -271,60 +271,60 @@ public class FinanceController extends BaseController{
 	public String record(String recordType, String symbol,  HttpSession session,
 			HttpServletRequest request, HttpServletResponse response) {
 		
-//		FrontUserM frontUserM = (FrontUserM) session.getAttribute("frontUserM");
-//		if(frontUserM != null){
-//			String page = request.getParameter("page");
-//			if (page == null) {
-//				page = "1";
-//			}
-//			SystemContext syct=new SystemContext();
-//			syct.setPageNum(Integer.parseInt(page));
-//			long pageTimes;// 页数
-//			int pageSize = 10;// 每页显示记录数
-//			syct.setNumPerPage(pageSize);
-//			
-//			if("0".equals(recordType)){	//人民币
-//				RmbOperationRecord rmbOperationRecord = new RmbOperationRecord();
-//				rmbOperationRecord.setLoginname(frontUserM.getUserName());
-//				if("0".equals(symbol)){
-//					rmbOperationRecord.setTradingtype("人民币充值");
-//					
-//				}else if("1".equals(symbol)){
-//					rmbOperationRecord.setTradingtype("人民币在线充值");
-//				}
-//				SystemContext syct=new SystemContext();
-//				syct.setNumPerPage(10);
-//				syct.setPageNum(1);
-//				Pager<RmbOperationRecord> btcPager = financeService.findRmbOperationRecord(syct, rmbOperationRecord);
-//			}else if("".equals(recordType)){	
-//				
-//			}else if("0".equals(recordType)){	
-//				
-//			}
-//			
-//			EntrustTrading entrustTrading = new EntrustTrading();
-//			entrustTrading.setLoginname(frontUserM.getUserName());
-//			Pager<EntrustTrading> pager = financeService.findEntrustTrading(syct, entrustTrading);
-//			long totalNum = pager.getTotalCount();// 总记录数
-//			if (totalNum % pageSize == 0) {
-//				pageTimes = totalNum / pageSize;
-//			} else {
-//				pageTimes = totalNum / pageSize + 1;
-//			}
-//
-//			try {
-//				request.setAttribute("recordList", pager.getDatas());
-//				request.setAttribute("totalNum", totalNum);
-//				request.setAttribute("currentPage", Integer.parseInt(page));
-//				request.setAttribute("pageTimes", pageTimes);
-//			} catch (Exception e) {
-//
-//			}
-//			return "/finance/record";
-//		}
-//		return "/test/index";
+		FrontUserM frontUserM = (FrontUserM) session.getAttribute("frontUserM");
+		if(frontUserM != null){
+			String page = request.getParameter("page");
+			if (page == null) {
+				page = "1";
+			}
+			SystemContext syct=new SystemContext();
+			syct.setPageNum(Integer.parseInt(page));
+			long pageTimes;// 页数
+			int pageSize = 10;// 每页显示记录数
+			syct.setNumPerPage(pageSize);
+			
+			if("0".equals(recordType)){	//人民币
+				RmbOperationRecord rmbOperationRecord = new RmbOperationRecord();
+				rmbOperationRecord.setLoginname(frontUserM.getUserName());
+				if("0".equals(symbol)){
+					rmbOperationRecord.setTradingtype("人民币充值");
+					
+				}else if("1".equals(symbol)){
+					rmbOperationRecord.setTradingtype("人民币在线充值");
+				}
+				SystemContext syct2=new SystemContext();
+				syct2.setNumPerPage(10);
+				syct2.setPageNum(1);
+				Pager<RmbOperationRecord> btcPager = financeService.findRmbOperationRecord(syct2, rmbOperationRecord);
+			}else if("".equals(recordType)){	
+				
+			}else if("0".equals(recordType)){	
+				
+			}
+			
+			EntrustTrading entrustTrading = new EntrustTrading();
+			entrustTrading.setLoginname(frontUserM.getUserName());
+			Pager<EntrustTrading> pager = financeService.findEntrustTrading(syct, entrustTrading);
+			long totalNum = pager.getTotalCount();// 总记录数
+			if (totalNum % pageSize == 0) {
+				pageTimes = totalNum / pageSize;
+			} else {
+				pageTimes = totalNum / pageSize + 1;
+			}
+
+			try {
+				request.setAttribute("recordList", pager.getDatas());
+				request.setAttribute("totalNum", totalNum);
+				request.setAttribute("currentPage", Integer.parseInt(page));
+				request.setAttribute("pageTimes", pageTimes);
+			} catch (Exception e) {
+
+			}
+			return "/finance/record";
+		}
+		return "/test/index";
 		
-		return "/finance/record";
+//		return "/finance/record";
 	}
 	
 	//委托明细页面

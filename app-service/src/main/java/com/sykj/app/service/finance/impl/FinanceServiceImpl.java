@@ -186,6 +186,25 @@ public class FinanceServiceImpl extends BaseServiceImpl implements FinanceServic
 	public Pager<EntrustTrading> findEntrustTrading(SystemContext syct, EntrustTrading entrustTrading) {
 		return entrustTradingDao.findEntrustTrading(syct, entrustTrading);
 	}
-	
-	
+
+	@Override
+	public void buyXnb(EntrustTrading entrustTrading) {
+		entrustTrading.setEntrusttradingId(UUID.randomUUID().toString());
+		entrustTrading.setCreatedatetime(DateUtil.format(new Date()));
+		
+		entrustTrading.setStatus("未成交");
+		entrustTrading.setDealtype("买入");
+		entrustTradingDao.addEntrustTrading(entrustTrading);
+	}
+
+	@Override
+	public void sellXnb(EntrustTrading entrustTrading) {
+		entrustTrading.setEntrusttradingId(UUID.randomUUID().toString());
+		entrustTrading.setCreatedatetime(DateUtil.format(new Date()));
+		
+		entrustTrading.setStatus("未成交");
+		entrustTrading.setDealtype("卖出");
+		
+		entrustTradingDao.addEntrustTrading(entrustTrading);
+	}
 }

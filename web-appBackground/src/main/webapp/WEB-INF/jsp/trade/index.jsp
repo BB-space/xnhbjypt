@@ -7,6 +7,7 @@
 <jsp:include page="../test/head.jsp"></jsp:include>
 <script type="text/javascript">
 
+
 $(function(){
 	//修改菜单头图片
 	$("#index").attr('src', "<%=request.getContextPath()%>/resources/img/test/navHome.png"); 
@@ -14,8 +15,44 @@ $(function(){
 	$("#finance").attr('src', "<%=request.getContextPath()%>/resources/img/test/navFinance.png"); 
 	$("#safe").attr('src', "<%=request.getContextPath()%>/resources/img/test/navSafe.png"); 
 	$("#news").attr('src', "<%=request.getContextPath()%>/resources/img/test/navNews.png"); 
+	 getJypthq();
+	 setInterval("getJypthq()", 3000);  
+	
 });
 
+function getJypthq() {  
+	
+	$.ajax({
+		type: "POST",
+		url: '<%=request.getContextPath()%>/trade.do?getJypthq&tm='+new Date().getTime(),
+		dataType:'json',
+		cache: false,
+		success: function(data){
+			var title = '<th>币种</th><th>最新成交价</th><th>买一价</th><th>卖一价</th><th>最高价</th><th>最低价</th><th>24H涨跌幅</th><th>24H成交量</th>';
+			var vtr = '';
+			$.each(data.obj, function(i, obj){
+				 vtr += '<tr';
+				 if(i%2 == 0)
+					 vtr += ' class="db" ';
+				 vtr += ' onclick="toKLine('+"'"+data.obj[i].type+"'"+');"><td>'+data.obj[i].type
+//				 vtr += ' url="<%=request.getContextPath()%>/trade.do?kline"><td>'+data.obj[i].type
+						+'</td><td class="red">￥'+data.obj[i].buy+'</td><td>￥'+data.obj[i].buy
+						+'</td><td>￥'+data.obj[i].sell+'</td><td>￥'+data.obj[i].high
+						+'</td><td>￥'+data.obj[i].low+'</td><td class="red">0.0%</td><td>0</td></tr>'
+		 	});
+			
+			if(vtr != ''){
+				$('#tra_tab').empty();
+				$('#tra_tab').append(title);
+				$('#tra_tab').append(vtr);
+			}
+		}
+	});
+} 
+
+function toKLine(type){
+	window.location.href = '<%=request.getContextPath()%>/trade.do?kline&type=' + type;
+}
 </script>
 </head>
 <body>
@@ -49,7 +86,7 @@ $(function(){
 
 <div class="trade_top">
 	
-	<table class="tra_tab">
+	<table class="tra_tab" id="tra_tab">
 		<tr>
 			<th>币种</th>
 			<th>最新成交价</th>
@@ -60,7 +97,17 @@ $(function(){
 			<th>24H涨跌幅</th>
 			<th>24H成交量</th>			
 		</tr>
-		<tr url="http://www.baidu.com">
+		 <%-- <tr url="<%=request.getContextPath()%>/trade.do?kline">
+			<td>比特币(BTC)</td>
+			<td class="red">￥3878.78</td>
+			<td>￥3878.78</td>	
+			<td>￥3878.78</td>	
+			<td>￥0</td>	
+			<td>￥0</td>	
+			<td class="red">0.0%</td>	
+			<td>0</td>				
+		</tr>  --%>
+		<%-- <tr class="db"  url="<%=request.getContextPath()%>/trade.do?kline">
 			<td>比特币(BTC)</td>
 			<td class="red">￥3878.78</td>
 			<td>￥3878.78</td>	
@@ -70,7 +117,7 @@ $(function(){
 			<td class="red">0.0%</td>	
 			<td>0</td>				
 		</tr>
-		<tr class="db"  url="http://www.baidu.com">
+		<tr url="<%=request.getContextPath()%>/trade.do?kline">
 			<td>比特币(BTC)</td>
 			<td class="red">￥3878.78</td>
 			<td>￥3878.78</td>	
@@ -79,17 +126,7 @@ $(function(){
 			<td>￥0</td>	
 			<td class="red">0.0%</td>	
 			<td>0</td>				
-		</tr>
-		<tr url="http://www.baidu.com">
-			<td>比特币(BTC)</td>
-			<td class="red">￥3878.78</td>
-			<td>￥3878.78</td>	
-			<td>￥3878.78</td>	
-			<td>￥0</td>	
-			<td>￥0</td>	
-			<td class="red">0.0%</td>	
-			<td>0</td>				
-		</tr>
+		</tr> --%>
 	</table>
 	<script type="text/javascript">
 		
