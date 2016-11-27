@@ -81,10 +81,11 @@ public class TradeController extends BaseController {
 	
 	@RequestMapping(params="getJypthq")
 	@ResponseBody
-	public Json getJypthq(HttpSession session,
+	public Json getJypthq(String type, HttpSession session,
 			HttpServletRequest req,HttpServletResponse response) {
 		Json j = new Json();
 		List<JSONObject> list = new ArrayList<JSONObject>();
+		
 		 //发送 GET 请求
     	JSONObject s=JyptUtil.getJypthq(Jypt.btc_jyhq_uql);
     	JSONObject s2=JyptUtil.getJypthq(Jypt.ltc_jyhq_uql);
