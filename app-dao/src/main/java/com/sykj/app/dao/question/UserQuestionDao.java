@@ -20,7 +20,7 @@ public interface UserQuestionDao extends IBaseDao<UserQuestion>{
 	/**
 	 * 删除提问记录
 	 */
-	public void cancelQuestion(String id);
+	public void deleteQuestion(String id);
 	/**
 	 * 获得所有提问记录（分页）
 	 */

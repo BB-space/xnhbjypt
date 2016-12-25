@@ -22,6 +22,7 @@ public class UserQuestion  implements java.io.Serializable {
 	private String questionNumber;//问题编号
 	private String replyDateTime; //回复时间
 	private String mobile; //联系电话
+	private Integer seq;
 	
 	public UserQuestion() {
 		super();
@@ -167,6 +168,14 @@ public class UserQuestion  implements java.io.Serializable {
 
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
+	}
+
+	public Integer getSeq() {
+		return seq;
+	}
+
+	public void setSeq(Integer seq) {
+		this.seq = seq;
 	}
 	
 }

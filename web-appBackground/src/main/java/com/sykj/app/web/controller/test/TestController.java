@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sykj.app.model.FrontUserM;
 import com.sykj.app.model.Json;
 import com.sykj.app.service.user.FrontUserService;
+import com.sykj.app.util.Jypt;
 import com.sykj.app.util.SMSUtil;
 import com.sykj.app.web.controller.BaseController;
 
@@ -37,12 +38,19 @@ public class TestController extends BaseController{
 		Json j = new Json();
 		FrontUserM frontUserM = frontUserService.login(user.getUserName(), user.getPassword());
 		if (frontUserM != null) {
-			session.setAttribute("frontUserM", frontUserM);
-			j.setMsg("登录成功!");
-			j.setSuccess(true);
-			j.setObj(frontUserM);
+			if("禁用".equals(frontUserM.getStatus())){
+				//用户被禁用，不能登陆
+				j.setSuccess(false);
+				j.setMsg("用户被禁用，请联系管理员接触禁用");
+			}else {
+				session.setAttribute("frontUserM", frontUserM);
+				j.setMsg("登录成功!");
+				j.setSuccess(true);
+				j.setObj(frontUserM);
+			}
 		}else{
-
+			j.setSuccess(false);
+			j.setMsg("用户名或密码错误，请重新输入！");
 		}
 		return j;
 	}
@@ -67,7 +75,7 @@ public class TestController extends BaseController{
 				return j;
 			}
 		}
-		
+		user.setIp(Jypt.server_ip);
 		FrontUserM frontUserM = frontUserService.register(user);
 		if (frontUserM != null) {
 			session.setAttribute("frontUserM", frontUserM);

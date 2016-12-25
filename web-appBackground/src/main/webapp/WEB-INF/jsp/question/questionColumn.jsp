@@ -121,30 +121,6 @@ $(function(){
 	$("#news").attr('src', "<%=request.getContextPath()%>/resources/img/test/navNews.png"); 
 });
 
-
-
-//提交问题
-function submitQuestionForm(){
-	var old_nickName = '${sessionScope.frontUserM.nickName}';
-	var new_nickName = $('#nickName').val();
-	
-	if(new_nickName == old_nickName)
-		return;
-	
-	var dataPara = $('#submitQuestionForm').serializeArray();
-	$.ajax({
-		url : '${pageContext.request.contextPath}/question.do?submitQuestion',
-		type : 'post',
-		data : dataPara,
-		success : function(data) {
-			var d = $.parseJSON(data);
-			if (d.success == true) {
-				
-			} 
-		}
-	});
-}
-
 //删除问题
 function cancelQuestion(item){
 	var dataPara = {questionId:item};

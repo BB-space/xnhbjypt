@@ -149,10 +149,10 @@ public class QuestionController extends BaseController{
 	
 	@RequestMapping(params="cancelQuestion")
 	@ResponseBody
-	public Json cancelQuestion(UserQuestion userQuestion, HttpSession session,
+	public Json deleteQuestion(UserQuestion userQuestion, HttpSession session,
 			HttpServletRequest req,HttpServletResponse response) {
 		Json j = new Json();
-		userQuestionService.cancelQuestion(userQuestion);
+		userQuestionService.deleteQuestion(userQuestion);
 		j.setSuccess(true);
 		return j;
 	}

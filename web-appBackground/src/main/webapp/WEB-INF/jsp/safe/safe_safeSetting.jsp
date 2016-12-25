@@ -14,19 +14,19 @@ $(function(){
 			$("#google_btn").text("查看");	
 		}
 		
-		if("${sessionScope.frontUserM.mobileStatus}" == "1"){
+		if("${sessionScope.frontUserM.mobileStatus}" == "true"){
 			$("#msgDiv2").html('<span>手机号码：  </span><span style="color:#66b2e3">${sessionScope.frontUserM.mobile}</span>&nbsp;&nbsp;<span>提现，修改密码，及安全设置时用以收取验证短信</span>');	
 			$("#msgDiv").addClass("safe_itemhover");	
 			$("#msg_btn").text("重置");	
 		}
 		
-		if("${sessionScope.frontUserM.emailStatus}" == "1"){
+		if("${sessionScope.frontUserM.emailStatus}" == "true"){
 			$("#emailDiv2").html('<span>邮箱地址： </span><span style="color:#66b2e3">${sessionScope.frontUserM.email}</span>&nbsp;&nbsp;<span>用于登录和找回密码</span>');	
 			$("#emailDiv").addClass("safe_itemhover");	
 			$("#email_btn").hide();
 		}
 		
-		if(("${sessionScope.frontUserM.googleCheckCode}" != "") || ("${sessionScope.frontUserM.mobileStatus}" == "1")){
+		if(("${sessionScope.frontUserM.googleCheckCode}" != "") || ("${sessionScope.frontUserM.mobileStatus}" == "true")){
 			$("#loginPasswordDiv").addClass("safe_itemhover");	
 			$("#loginPassword_btn").text("重置");
 			

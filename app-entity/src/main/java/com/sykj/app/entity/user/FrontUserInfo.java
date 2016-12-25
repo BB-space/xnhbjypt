@@ -36,6 +36,7 @@ public class FrontUserInfo implements java.io.Serializable  {
 	private String  merchantsID; //推荐人UID
 	private String  withDrawalStatus; //提现状态
 	private String  mentionMoneyStatus; //mentionMoneyStatus
+	private String status; //状态：正常/禁用
 	
 	public FrontUserInfo() {
 		super();
@@ -237,5 +238,11 @@ public class FrontUserInfo implements java.io.Serializable  {
 	public void setMentionMoneyStatus(String mentionMoneyStatus) {
 		this.mentionMoneyStatus = mentionMoneyStatus;
 	}
-	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	 
 }

@@ -2,6 +2,43 @@
 	pageEncoding="UTF-8"%>
 <html>
 <jsp:include page="./head.jsp"></jsp:include>
+<script type="text/javascript">
+$(function(){
+	 getJypthq();
+	 setInterval("getJypthq()", 3000);  
+});
+
+function getJypthq() {  
+	
+	$.ajax({
+		type: "POST",
+		url: '<%=request.getContextPath()%>/trade.do?getJypthq&tm='+new Date().getTime(),
+		dataType:'json',
+		cache: false,
+		success: function(data){
+			
+			var title = '<tr class="tr1"><td>交易配对</td><td>最新成交价</td><td>变化</td><td>高</td><td>低</td></tr>';
+			var vtr = '';
+			$.each(data.obj, function(i, obj){
+				 vtr += '<tr ';
+				 vtr += ' onclick="toKLine('+"'"+data.obj[i].type+"'"+');"><td>'+data.obj[i].type + '/人民币'
+						+'</td><td class="red">￥'+data.obj[i].buy+'</td><td></td><td>￥'+data.obj[i].high
+						+'</td><td>￥'+data.obj[i].low+'</td></tr>'
+		 	});
+			
+			if(vtr != ''){
+				$('#tbTrade').empty();
+				$('#tbTrade').append(title);
+				$('#tbTrade').append(vtr);
+			}
+		}
+	});
+} 
+
+function toKLine(type){
+	window.location.href = '<%=request.getContextPath()%>/trade.do?kline&type=' + type;
+}
+</script>
 <body>
 <!--banner start here-->
  <div class="banner">
@@ -115,7 +152,7 @@
 		<p>最新交易</p>
 		<div class="news-bg1"></div>
 		<div class="tradeInfo">
-			<table class="tbTrade">
+			<table class="tbTrade"  id="tbTrade">
 				<tr class="tr1">
 					<td>交易配对</td>
 					<td>最新成交价</td>
@@ -123,7 +160,7 @@
 					<td>高</td>
 					<td>低</td>
 				</tr>
-				<tr>
+				<!-- <tr>
 					<td>比特币(BTC)/人民币</td>
 					<td>3383</td>
 					<td>0.00%</td>
@@ -143,7 +180,7 @@
 					<td>0.00%</td>
 					<td>0</td>
 					<td>0</td>
-				</tr>
+				</tr> -->
 			</table>
 		</div>
 	</div>

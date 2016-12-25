@@ -23,7 +23,7 @@ public interface FrontUserService {
 	 * @param uid
 	 * @param uuid
 	 */
-	public void sendEmail(String email, int uid, String uuid);
+	public void sendEmail(String email, int uid, String uuid, String ip);
 	
 	/**
 	 * 前台会员注册验证用户是否已存在

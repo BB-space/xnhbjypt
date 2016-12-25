@@ -19,6 +19,12 @@ public class UserxnbDaoImpl extends BaseDao<Userxnb> implements UserxnbDao{
 	}
 
 	@Override
+	public Userxnb getUserxnbByLoginNameAndType(String loginName, String xnbtype) {
+		
+		return this.get("from Userxnb t where t.loginname='" + loginName + "' and t.xnbtype = '" + xnbtype + "'");
+	}
+
+	@Override
 	public List<Userxnb> getUserxnbByLoginName(String loginName) {
 		return this.list("from Userxnb t where t.loginname = '"+ loginName + "'");
 	}

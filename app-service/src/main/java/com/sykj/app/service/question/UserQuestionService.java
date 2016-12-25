@@ -21,7 +21,7 @@ public interface UserQuestionService {
 	/**
 	 * 删除提问记录
 	 */
-	public void cancelQuestion(UserQuestion question);
+	public void deleteQuestion(UserQuestion question);
 	
 	/**
 	 * 获得所有提问记录（分页）

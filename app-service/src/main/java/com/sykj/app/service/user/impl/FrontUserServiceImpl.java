@@ -64,11 +64,12 @@ public class FrontUserServiceImpl extends BaseServiceImpl implements FrontUserSe
 			frontUserInfo.setUserId(fu.getId());
 			frontUserInfo.setMembeLevel(0);
 			frontUserInfo.setCreateTime(new Date());
+			frontUserInfo.setStatus("正常");
 			frontUserInfoDao.add(frontUserInfo);
 			
 			if("email".equals(fum.getRegType())){
 				//发送注册账号激活邮件
-				sendEmail(fum.getEmail(), frontUserInfo.getUid(), frontUserInfo.getUuid());
+				sendEmail(fum.getEmail(), frontUserInfo.getUid(), frontUserInfo.getUuid(), fum.getIp());
 			}
 			
 			BeanUtils.copyProperties(frontUserInfo, frontUserM);
@@ -81,18 +82,18 @@ public class FrontUserServiceImpl extends BaseServiceImpl implements FrontUserSe
 	}
 
 	@Override
-	public void sendEmail(String email, int uid, String uuid){
+	public void sendEmail(String email, int uid, String uuid, String ip){
 		int location = email.indexOf("@");
 		String user = email.substring(0, location);
 		
 		 ///邮件的内容  
         StringBuffer sb=new StringBuffer("尊敬的用户：" + user + "</br>");  
         sb.append("您好！</br>");  
-        sb.append("感谢您注册数字资产交易平台，请点击以下链接完成账号激活：<a href=\"http://localhost:8080/xnhbjypt/test.do?validate&uid=");  
+        sb.append("感谢您注册数字资产交易平台，请点击以下链接完成账号激活：<a href=\"http://"+ip+"/xnhbjypt/test.do?validate&uid=");  
         sb.append(uid);
         sb.append("&uuid=");   
         sb.append(uuid);  
-        sb.append("\">http://localhost:8080/xnhbjypt/test.do?validate&uid=");   
+        sb.append("\">http://"+ip+"/xnhbjypt/test.do?validate&uid=");   
         sb.append(uid);
         sb.append("&uuid=");   
         sb.append(uuid);  

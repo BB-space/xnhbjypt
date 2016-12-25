@@ -16,6 +16,7 @@ import com.sykj.app.entity.finance.EntrustTrading;
 import com.sykj.app.model.FrontUserM;
 import com.sykj.app.model.Json;
 import com.sykj.app.service.finance.FinanceService;
+import com.sykj.app.service.user.FrontUserService;
 import com.sykj.app.util.Jypt;
 import com.sykj.app.util.JyptUtil;
 import com.sykj.app.web.controller.BaseController;
@@ -28,6 +29,8 @@ public class TradeController extends BaseController {
 
 	@Resource
 	private FinanceService financeService;
+	@Resource
+	private FrontUserService frontUserService;
 	
 	@RequestMapping(params="index")
 	public String index(HttpSession session, HttpServletRequest req,HttpServletResponse response) {
@@ -39,9 +42,15 @@ public class TradeController extends BaseController {
 	public String kline(String type, HttpSession session, 
 			HttpServletRequest req,HttpServletResponse response) {
 		
-		
-		
-		return "/trade/kline";
+		FrontUserM frontUserM = (FrontUserM) session.getAttribute("frontUserM");
+		if(frontUserM != null){
+			//检查用户是否实名认证
+			boolean b = frontUserService.certification(frontUserM.getId());
+			if(b){  //已经实名认证
+				return "/trade/kline";
+			}
+		}
+		return "/safe/safe_userSetting";
 	}
 	
 	//买入，

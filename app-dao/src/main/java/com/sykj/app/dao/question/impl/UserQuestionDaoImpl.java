@@ -41,7 +41,7 @@ public class UserQuestionDaoImpl extends BaseDao<UserQuestion> implements UserQu
 	}
 
 	@Override
-	public void cancelQuestion(String id) {
+	public void deleteQuestion(String id) {
 		this.updateByHql("delete from UserQuestion t where t.questionId = '" + id +"'");
 	}
 }

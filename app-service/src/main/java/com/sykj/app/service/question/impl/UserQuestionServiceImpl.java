@@ -27,6 +27,7 @@ public class UserQuestionServiceImpl extends BaseServiceImpl implements UserQues
 		
 		question.setQuestionId(UUID.randomUUID().toString());
 		question.setCreateDateTime(DateUtil.format(new Date()));
+		question.setSeq(0);
 		question.setStatus("未解决");
 		
 		userQuestionDao.addUserQuestion(question);
@@ -38,8 +39,8 @@ public class UserQuestionServiceImpl extends BaseServiceImpl implements UserQues
 	}
 
 	@Override
-	public void cancelQuestion(UserQuestion question) {
-		userQuestionDao.cancelQuestion(question.getQuestionId());
+	public void deleteQuestion(UserQuestion question) {
+		userQuestionDao.deleteQuestion(question.getQuestionId());
 	}
 	
 }

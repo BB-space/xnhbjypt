@@ -11,4 +11,8 @@ public class Jypt {
 	public static String doge_jyhq_uql = "http://api.btctrade.com/api/ticker?coin=doge";//狗狗币行情
 	
 	public static String ybc_jyhq_uql = "http://api.btctrade.com/api/ticker?coin=ybc";//元宝币行情
+	
+//	public static String server_ip = "60.191.139.226:8080";
+	
+	public static String server_ip = "localhost:8080";
 }

@@ -5,7 +5,6 @@ import com.sykj.app.entity.finance.RmbOperationRecord;
 import com.sykj.app.entity.finance.WaitAuditrmbt;
 import com.sykj.app.entity.finance.WaitAuditrmbw;
 import com.sykj.app.entity.finance.XnbOperationRecord;
-import com.sykj.app.entity.question.UserQuestion;
 import com.sykj.app.model.Pager;
 import com.sykj.app.model.SystemContext;
 import com.sykj.app.model.finance.PersonFinance;

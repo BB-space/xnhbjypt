@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sykj.app.model.FrontUserM;
 import com.sykj.app.model.Json;
 import com.sykj.app.service.user.FrontUserService;
+import com.sykj.app.util.Jypt;
 import com.sykj.app.web.controller.BaseController;
 
 @Controller
@@ -114,7 +115,7 @@ public class SafeController extends BaseController{
 			}else {
 				frontUserM.setEmail(email);
 				frontUserService.saveEmail(frontUserM);
-				frontUserService.sendEmail(email, frontUserM.getUid(), frontUserM.getUuid());
+				frontUserService.sendEmail(email, frontUserM.getUid(), frontUserM.getUuid(), Jypt.server_ip);
 				j.setSuccess(true);
 			}
 		}else {

@@ -67,6 +67,9 @@ $(function(){
 	if('${sessionScope.frontUserM.realName}'){
 		$('#user_setting1').hide();
 		$('#user_setting2').show();
+		var cardNumber = '${sessionScope.frontUserM.cardNumber}';
+		cardNumber = cardNumber.substr(0, 5);
+		$('#span_cardNumber').html(cardNumber + '************');
 	}else {
 		$('#user_setting1').show();
 		$('#user_setting2').hide();
@@ -296,8 +299,8 @@ function submitUserinfoForm(){
 					<span class="c1">
 						证件号码：
 					</span>
-					<span>
-						44092************
+					<span id = "span_cardNumber">
+						
 					</span>
 				</li>
 			</ul>

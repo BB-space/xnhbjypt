@@ -25,7 +25,8 @@ public class FrontUserM {
 	private String regType; //注册类型 mobile/email
 	
 	private String oldPassword; //旧密码
-	
+	private String ip; //服务器ip
+	private String status; //状态 ： 正常/禁用
 	
 	@Override
 	public String toString() {
@@ -162,6 +163,16 @@ public class FrontUserM {
 	public void setOldPassword(String oldPassword) {
 		this.oldPassword = oldPassword;
 	}
-	
-	
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 }

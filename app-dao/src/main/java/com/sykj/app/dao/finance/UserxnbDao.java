@@ -13,6 +13,11 @@ public interface UserxnbDao extends IBaseDao<Userxnb>{
 	public Userxnb getUserxnb(String id);
 	
 	/**
+	 * 登录名，类型查询用户虚拟币
+	 */
+	public Userxnb getUserxnbByLoginNameAndType(String loginName, String xnbtype);
+	
+	/**
 	 * 查找会员虚拟币
 	 */
 	public List<Userxnb> getUserxnbByLoginName(String loginName);

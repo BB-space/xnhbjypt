@@ -121,31 +121,21 @@ $(function(){
 	$("#news").attr('src', "<%=request.getContextPath()%>/resources/img/test/navNews.png"); 
 });
 
-
-
-
-//提交问题
-function submitQuestionForm(){
-	var old_nickName = '${sessionScope.frontUserM.nickName}';
-	var new_nickName = $('#nickName').val();
-	
-	if(new_nickName == old_nickName)
-		return;
-	
-	var dataPara = $('#submitQuestionForm').serializeArray();
+//删除问题
+function cancelQuestion(item){
+	var dataPara = {questionId:item};
 	$.ajax({
-		url : '${pageContext.request.contextPath}/question.do?submitQuestion',
+		url : '${pageContext.request.contextPath}/question.do?cancelQuestion',
 		type : 'post',
 		data : dataPara,
 		success : function(data) {
 			var d = $.parseJSON(data);
 			if (d.success == true) {
-				
+				window.location.href = "<%=request.getContextPath()%>/question.do?questionColumn2";
 			} 
 		}
 	});
 }
-
 
 </script>
 </head>
@@ -220,7 +210,7 @@ function submitQuestionForm(){
 								<td class="gray" width="150">${item.createDateTime}</td>
 								<td class="gray" width="80">${item.status}</td>
 								<td class="gray" width="60">
-									<a onclick="javascript:cancelQuestion(29);" href="javascript:void(0);">
+									<a onclick="javascript:cancelQuestion('${item.questionId}');" href="javascript:void(0);">
 										删除
 									</a>
 								</td>

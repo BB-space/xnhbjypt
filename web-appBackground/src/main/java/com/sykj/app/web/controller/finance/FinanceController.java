@@ -7,17 +7,28 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sykj.app.entity.finance.EntrustTrading;
+import com.sykj.app.entity.finance.MemberMoney;
 import com.sykj.app.entity.finance.RmbOperationRecord;
+import com.sykj.app.entity.finance.Userxnb;
 import com.sykj.app.entity.finance.WaitAuditrmbt;
 import com.sykj.app.entity.finance.WaitAuditrmbw;
+import com.sykj.app.entity.finance.WaitAuditxnbt;
 import com.sykj.app.entity.finance.XnbOperationRecord;
 import com.sykj.app.model.FrontUserM;
+import com.sykj.app.model.Json;
 import com.sykj.app.model.Pager;
 import com.sykj.app.model.SystemContext;
 import com.sykj.app.model.finance.PersonFinance;
 import com.sykj.app.service.finance.FinanceService;
+import com.sykj.app.service.finance.MemberMoneyService;
+import com.sykj.app.service.finance.UserxnbService;
+import com.sykj.app.service.finance.WaitAuditrmbtService;
+import com.sykj.app.service.finance.WaitAuditrmbwService;
+import com.sykj.app.service.finance.WaitAuditxnbtService;
+import com.sykj.app.service.user.FrontUserService;
 import com.sykj.app.web.controller.BaseController;
 
 @Controller
@@ -26,6 +37,18 @@ public class FinanceController extends BaseController{
 	
 	@Resource
 	private FinanceService financeService;
+	@Resource
+	private UserxnbService userxnbService;
+	@Resource
+	private WaitAuditxnbtService waitAuditxnbtService;
+	@Resource
+	private WaitAuditrmbwService waitAuditrmbwService;
+	@Resource
+	private WaitAuditrmbtService waitAuditrmbtService;
+	@Resource
+	private MemberMoneyService memberMoneyService;
+	@Resource
+	private FrontUserService frontUserService;
 	
 	//个人财务页面
 	@RequestMapping(params="index")
@@ -34,11 +57,15 @@ public class FinanceController extends BaseController{
 		
 		FrontUserM frontUserM = (FrontUserM) session.getAttribute("frontUserM");
 		if(frontUserM != null){
-			PersonFinance pf = financeService.getPersonFinance(frontUserM.getUserName());
-			request.setAttribute("personFinance", pf);
+			//检查用户是否实名认证
+			boolean b = frontUserService.certification(frontUserM.getId());
+			if(b){  //已经实名认证
+				PersonFinance pf = financeService.getPersonFinance(frontUserM.getUserName());
+				request.setAttribute("personFinance", pf);
+				return "/finance/index";
+			}
 		}
-		
-		return "/finance/index";
+		return "/safe/safe_userSetting";
 	}
 	
 	//人民币充值 银行汇款页面
@@ -222,6 +249,9 @@ public class FinanceController extends BaseController{
 		return "/finance/withdrawBtc3";
 	}
 	
+
+	
+	
 	//网络流通币提现页面
 	@RequestMapping(params="withdrawXnb")
 	public String withdrawXnb(String xnbType, HttpSession session,
@@ -373,5 +403,135 @@ public class FinanceController extends BaseController{
 		return "/test/index";
 	}
 
-
+	//虚拟币提现
+	@RequestMapping(params="withdrawXnbt")
+	@ResponseBody
+	public Json withdrawXnbt(WaitAuditxnbt xnbt, HttpSession session,
+			HttpServletRequest req,HttpServletResponse response) {
+		Json j = new Json();
+		FrontUserM frontUserM = (FrontUserM) session.getAttribute("frontUserM");
+		if(frontUserM != null){
+			Userxnb xnb = userxnbService.getUserxnbByLoginNameAndType(frontUserM.getUserName(), xnbt.getXnbtype());
+			if(xnb != null ){
+				//判断用户提现的虚拟币是否足够提现
+				Double canUseXnb = xnb.getUserallnum() - xnb.getUserfreezenum() - xnbt.getNum();
+				if(canUseXnb >= 0 ){
+					//足够，则插入待审核虚拟币提现列表，虚拟币操作列表，冻结对应虚拟币的数量（冻结的数量不能再操作，包括提现/交易）
+					xnbt.setLoginname(xnb.getLoginname());
+					xnbt.setUsernickname(xnb.getUsernickname());
+					xnbt.setUserrealname(xnb.getUserrealname());
+					waitAuditxnbtService.addWaitAuditxnbt(xnbt);
+					j.setMsg("0");
+					j.setSuccess(true);
+				}else {
+					//否则，返回提示虚拟币数量不足
+					j.setMsg("-1");
+					j.setSuccess(false);
+				}
+			}else {
+				j.setSuccess(false);
+			}
+		}else {
+			j.setSuccess(false);
+		}
+		return j;
+	}
+	
+	//取消虚拟币提现
+	@RequestMapping(params="cancelWithdrawXnbt")
+	@ResponseBody
+	public Json cancelWithdrawXnbt(WaitAuditxnbt xnbt, HttpSession session,
+			HttpServletRequest req,HttpServletResponse response) {
+		Json j = new Json();
+		FrontUserM frontUserM = (FrontUserM) session.getAttribute("frontUserM");
+		if(frontUserM != null){
+			waitAuditxnbtService.cancelWaitAuditxnbtById(xnbt.getWaitauditxnbtId());
+			j.setMsg("0");
+			j.setSuccess(true);
+		}else {
+			j.setSuccess(false);
+			j.setMsg("-1");
+		}
+		return j;
+	}
+	
+	//虚拟币充值
+	@RequestMapping(params="rechargeXnbc")
+	@ResponseBody
+	public Json rechargeXnbc(WaitAuditxnbt xnbt, HttpSession session,
+			HttpServletRequest req,HttpServletResponse response) {
+		Json j = new Json();
+		
+		return j;
+	}
+		
+	//人民币提现
+	@RequestMapping(params="withdrawRmbw")
+	@ResponseBody
+	public Json withdrawRmbw(WaitAuditrmbw rmbw, HttpSession session,
+			HttpServletRequest req,HttpServletResponse response) {
+		Json j = new Json();
+		FrontUserM frontUserM = (FrontUserM) session.getAttribute("frontUserM");
+		if(frontUserM != null){
+			MemberMoney mm = memberMoneyService.getMemberMoneyByLoginName(frontUserM.getUserName());
+			if(mm != null ){
+				//判断用户提现的人民币是否足够提现
+				Double canUsermb = mm.getUserallmoney() - mm.getUserfreezemoney() - rmbw.getMoney();
+				if(canUsermb >= 0 ){
+					//足够，则插入待审核人民币提现列表，人民币操作列表，冻结对应人民币的数量（冻结的数量不能再操作，包括提现/交易）
+					rmbw.setLoginname(mm.getLoginname());
+					rmbw.setUsernickname(mm.getUsernickname());
+					rmbw.setUserrealname(mm.getUserrealname());
+					waitAuditrmbwService.addWaitAuditrmbw(rmbw);
+					j.setMsg("0");
+					j.setSuccess(true);
+				}else {
+					//否则，返回提示人民币数量不足
+					j.setMsg("-1");
+					j.setSuccess(false);
+				}
+			}else {
+				j.setSuccess(false);
+			}
+		}else {
+			j.setSuccess(false);
+		}
+		return j;
+	}
+	
+	//取消人民币提现
+	@RequestMapping(params="cancelWithdrawRmbw")
+	@ResponseBody
+	public Json cancelWithdrawRmbw(WaitAuditrmbw rmbw, HttpSession session,
+			HttpServletRequest req,HttpServletResponse response) {
+		Json j = new Json();
+		FrontUserM frontUserM = (FrontUserM) session.getAttribute("frontUserM");
+		if(frontUserM != null){
+			waitAuditrmbwService.cancelWaitAuditrmbwById(rmbw.getWaitauditrmbwId());
+			j.setMsg("0");
+			j.setSuccess(true);
+		}else {
+			j.setSuccess(false);
+			j.setMsg("-1");
+		}
+		return j;
+	}
+		
+	//人民币充值
+	@RequestMapping(params="rechargeRmbc")
+	@ResponseBody
+	public Json rechargeRmbc(WaitAuditrmbt rmbt, HttpSession session,
+			HttpServletRequest req,HttpServletResponse response) {
+		Json j = new Json();
+		FrontUserM frontUserM = (FrontUserM) session.getAttribute("frontUserM");
+		if(frontUserM != null){
+			waitAuditrmbtService.addWaitAuditrmbt(rmbt);
+			j.setMsg("0");
+			j.setSuccess(true);
+		}else {
+			j.setSuccess(false);
+			j.setMsg("-1");
+		}
+		return j;
+	}
 }
