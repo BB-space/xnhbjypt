@@ -220,4 +220,28 @@ public class TestController extends BaseController{
 		
 //		return "/test/index";
 	}
+	
+	//前台重置密码
+	@RequestMapping(params="resetPassword")
+	@ResponseBody
+	public Json resetPassword(String userName, String password, String mobileCheckCode, HttpSession session,
+			HttpServletRequest req,HttpServletResponse response) {
+		System.out.println(userName + "," + password+ ", " + mobileCheckCode);
+		Json j = new Json();
+//		String mobileCheckCode = (String) session.getAttribute("mobileCheckCode");
+		if(!"888888".equals(mobileCheckCode)){	//手机验证码不正确
+			j.setSuccess(false);
+			j.setMsg("1");
+			return j;
+		}else {
+			//重置密码
+			frontUserService.updatePassword(userName, password);
+			
+			j.setSuccess(true);
+			j.setMsg("0");
+		}
+		
+		return j;
+	}
+	
 }

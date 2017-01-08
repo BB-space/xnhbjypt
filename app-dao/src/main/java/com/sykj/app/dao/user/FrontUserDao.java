@@ -29,5 +29,6 @@ public interface FrontUserDao extends IBaseDao<FrontUser>{
 	 */
 	public FrontUser checkUserName(String userName);
 	
-
+	//更新密码
+	public void updatePassword(String userName, String password, String updateTime);
 }

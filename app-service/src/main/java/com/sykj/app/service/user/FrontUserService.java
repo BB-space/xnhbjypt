@@ -37,7 +37,7 @@ public interface FrontUserService {
 	/**
 	 * 重置密码
 	 */
-	public int updatePassword(FrontUserM frontUserM);
+	public int updatePassword(String userName, String password);
 	/**
 	 *根据用户编号查询用户信息
 	 * @param userId

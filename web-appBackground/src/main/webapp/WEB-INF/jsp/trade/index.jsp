@@ -51,7 +51,15 @@ function getJypthq() {
 } 
 
 function toKLine(type){
-	window.location.href = '<%=request.getContextPath()%>/trade.do?kline&type=' + type;
+	var location = '<%=request.getContextPath()%>/trade.do?kline&type=' + type;
+	
+	if($('.login_after').is(':hidden')){	
+		//未登录
+		$.session.set("location", location);
+		$('#login_a').click();
+	}else {
+		window.location.href = location;
+	}
 }
 </script>
 </head>

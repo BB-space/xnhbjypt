@@ -38,6 +38,12 @@ public class FrontUserDaoImpl extends BaseDao<FrontUser> implements FrontUserDao
 		return this.get("from FrontUser t where t.userName='"+userName+"'");
 	}
 
+	@Override
+	public void updatePassword(String userName, String password, String updateTime) {
+		this.updateByHql("update FrontUser t set t.password = '"+password+"',t.updateTime = '"+ updateTime 
+				+"' where t.userName = '"+userName+"'");
+	}
+
 
 }
 	

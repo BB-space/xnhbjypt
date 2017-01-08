@@ -22,8 +22,28 @@
 <script src="<%=request.getContextPath()%>/resources/js/test/jquerySession.js"></script>
 
  <script type="text/javascript">
- var mark ;
+ var mark, demo ;
  $(function(){
+	demo = $("#resetForm").Validform();  
+	demo.config({
+		 tiptype: function(msg,o,cssctl){
+		 },
+		 ajaxPost: true,
+		 url: '${pageContext.request.contextPath}/test.do?resetPassword',
+		 callback:function(data){
+			if(data.success == false){
+				if(data.msg == '1'){
+					alert('验证码不对');
+				}
+			}else if(data.success == true){
+				alert('密码已重置，请重新登陆');
+				window.location.href = '${pageContext.request.contextPath}/test.do?index';
+				/* $("#login_win").hide();	
+				$(".find_win").hide(); */
+			}
+		}
+	}); 
+		
 	 if('${sessionScope.frontUserM}'){
 			$(".lg_win .res").click();
 			$('.loginDiv').hide();
@@ -442,9 +462,89 @@
 		 window.location.href = "<%=request.getContextPath()%>/test.do?logout";
 	}
 	
-	//发送验证码
-	function sendMobileCheckCode(){
+	//忘记密码
+ 	function forgetPassword(){
 		
+ 		var userName = trim($('#login_userName').val());
+		if(userName == ''){
+			$('#err_login_userName').html("请输入用户名！").addClass("Validform_checktip Validform_wrong");
+			return;
+		}
+		
+		var dataPara = {userName: userName};
+		//校验登陆名是否存在
+		$.ajax({
+			url : '${pageContext.request.contextPath}/test.do?checkUserName',
+			type : 'post',
+			data : dataPara,
+			success : function(data) {
+				var d = $.parseJSON(data);
+				if (d.success == true) {
+					$("#login_win").hide();	
+					$(".find_win").show();
+					$("#reset_userName").val(userName);
+				}else {
+					$('#err_login_userName').html("用户名不存在！").addClass("Validform_checktip Validform_wrong");
+				}
+			}
+		});
+	};	 
+	
+	//发送验证码 -- 忘记密码，手机找回密码
+	function sendCode(){
+		
+		//发送验证码的效果
+		var getTime = 0;
+		var _this =  $("#send_resetMobileCode");
+		var item =  $("#send_resetMobileCode");
+		if($(item).hasClass("yz_unable")){
+			return;	
+		}
+		
+		//发送验证码
+		var mobile = trim($("#reset_mobile").val());
+		
+		if(mobile == ''){
+			$('#err_reset_mobile').html("请输入手机号码！").addClass("Validform_checktip Validform_wrong");
+			return;
+		}
+		
+		var dataPara = {mobile:mobile};
+		$.ajax({
+			url : '${pageContext.request.contextPath}/test.do?sendCheckCode',
+			type : 'post',
+			data : dataPara,
+			success : function(data) {
+				var d = $.parseJSON(data);
+			}
+		});
+		
+		$(item).addClass("yz_unable");
+		var numAll = 60;
+		$(item).html(numAll+"秒后重发");		
+		getTime = setInterval(function(){
+			numAll--;
+			if(numAll <= 0){
+				//重置session手机验证码
+				$.ajax({
+					url : '${pageContext.request.contextPath}/test.do?resetCheckCode',
+					type : 'post',
+					//data : dataPara,
+					success : function(data) {
+					}
+				});
+				
+				$(_this).removeClass("yz_unable");	
+				$(_this).html("发送验证码");
+				clearInterval(getTime);
+				return;
+			}
+			$(_this).html(numAll+"秒后重发");	
+		},1000);
+	}
+	
+	//发送验证码 -- 手机注册
+	function sendMobileCheckCode(){
 		
 		//发送验证码的效果
 		var getTime = 0;
@@ -493,11 +593,7 @@
 			}
 			$(_this).html(numAll+"秒后重发");	
 		},1000);
-		
-		
-		
 	}
-	
 	
 	function changeImg(type) {
 		var imgSrc;
@@ -622,7 +718,7 @@
 						<input name="remember_password" type="checkbox" class="chk" checked="checked" />
 						记住登录	
 					</label>
-					<a href="#" class="forget_a">忘记密码？</a>
+					<a href="#" class="forget_a" onclick="forgetPassword();">忘记密码？</a>
 					<div class="clear"></div>	
 				</div>	
 				
@@ -751,38 +847,43 @@
 	
 	<div class="lg_win find_win">
 		<div class="findwin_title">找回密码</div>		
-		<div class="lgwin_wrap show">
-			<form>
+		<form id="resetForm" method="post" >
+			<div class="lgwin_wrap show" >
 				<div class="line25"></div>
+				<input type="hidden" name="userName" id="reset_userName" placeholder="用户账号" />
 				<div class="in">
-					<a href="javascript:;" class="get_yz">发送验证码</a>
-					<input type="text" class="text" value="手机号码" datatype="m" errormsg="请输入手机号码" />	
+					<a href="javascript:sendCode();" class="get_yz" id="send_resetMobileCode">发送验证码</a>
+					<input type="text" class="text" name="mobile" id="reset_mobile" placeholder="手机号码" datatype="m" errormsg="请输入手机号码" />
+					<span id='err_reset_mobile'></span> 
 				</div>
 				<div class="line25"></div>
 				<div class="in">
-					<input type="text" class="text" value="收到的验证码" datatype="n6-6" errormsg="请输入6位验证码" />	
+					<input type="text" class="text" name="mobileCheckCode" id="reset_mobileCheckCode" placeholder="收到的验证码" datatype="n6-6" errormsg="请输入6位验证码" />
+					<span id='err_reset_checkCode'></span>	
 				</div>
 				<div class="line25"></div>
 				<div class="in">
 					<input type="text" class="text ps1" value="新设密码" />
-					<input type="password" class="text ps2" name="userpass" value="" datatype="*6-16" errormsg="密码为6到16位字符" />
+					<input type="password" class="text ps2" name="password" id="reset_password" value="" datatype="*6-16" errormsg="密码为6到16位字符" />
+					<span id='err_reset_userPass'></span>	
 				</div>
 				<div class="line25"></div>
 				<div class="in">
 					<input type="text" class="text ps1" value="再次输入密码" />
-					<input type="password" class="text ps2" value="" datatype="*" recheck="userpass" errormsg="两次输入的密码不一至" />
+					<input type="password" class="text ps2" value="" datatype="*" recheck="password" errormsg="两次输入的密码不一至" />
+					<span id='err_reset_userPass2'></span>	
 				</div>			
 				<div class="line25"></div>
 				<div class="sub_outer">
-					<input type="submit" class="sub" value="确定" />
-					<input type="reset" class="res" value="取消" />
+					<input type="submit" class="sub" value="确定" id="btn_sub"/>
+					<input type="reset" class="res" value="取消" id="btn_ret"/>
 					<div class="clear"></div>	
 				</div>			
 					
-			</form>	
-		</div>		
+			</div>		
+		</form>	
 			
 	</div>
-		
+
 </body>
 

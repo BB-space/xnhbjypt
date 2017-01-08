@@ -271,12 +271,7 @@ $(function(){
 		$(".lg_win").hide();		
 	});
 	
-	$(".forget_a").click(function(evt){
-		evt.preventDefault();	
-//		$(".login_win").hide();	
-		$("#login_win").hide();	
-		$(".find_win").show();
-	});	
+
 	
 	//发送验证码的效果
 //	var getTime = 0;

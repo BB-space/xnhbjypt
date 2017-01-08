@@ -132,7 +132,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 
 
 		if(requestPath.equals("/code.do?code") || requestPath.substring(0, 5).equals("/test")
-			|| requestPath.substring(0, 5).equals("/news") || requestPath.substring(0, 6).equals("/trade")){
+			|| requestPath.substring(0, 5).equals("/news") || requestPath.substring(0, 15).equals("/trade.do?index")
+			|| requestPath.substring(0, 19).equals("/trade.do?getJypthq")){
 			return true;
 		}
 		FrontUserM frontUserM = (FrontUserM) request.getSession().getAttribute("frontUserM");

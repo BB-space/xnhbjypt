@@ -16,6 +16,7 @@ import com.sykj.app.entity.user.User;
 import com.sykj.app.model.FrontUserM;
 import com.sykj.app.service.impl.BaseServiceImpl;
 import com.sykj.app.service.user.FrontUserService;
+import com.sykj.app.util.DateUtil;
 import com.sykj.app.util.SecurityUtil;
 import com.sykj.app.util.SendEmail;
 
@@ -131,8 +132,10 @@ public class FrontUserServiceImpl extends BaseServiceImpl implements FrontUserSe
 	}
 
 	@Override
-	public int updatePassword(FrontUserM frontUserM) {
-		// TODO Auto-generated method stub
+	public int updatePassword(String userName, String password) {
+		String updateTime = DateUtil.formatDay(new Date());
+		password = SecurityUtil.md5(password);
+		frontUserDao.updatePassword(userName, password, updateTime);
 		return 0;
 	}
 
